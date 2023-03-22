@@ -89,20 +89,41 @@ cp:
 clean:
 	$(call RM,$(DIR_TARGET))
 
-# Execute this command:
-#
-# * Immediately after cloning this repo.
-#
-# * When you see "changes" in some of the submodule folders after pulling.
-#   This indicates a version update.
-mod:
-	git reset mod
-	git submodule update --init --recursive --quiet
-
 deps:
 ifeq ($(OS),Windows_NT)
 	scoop install sass watchexec deno
 else
 	brew install -q sass/sass/sass watchexec deno
 endif
-	$(MAKE) mod
+
+# Updates submodules. If you ran `make hooks`, you shouldn't need to run this
+# manually. Otherwise, run this:
+#
+# * Immediately after cloning this repo.
+#
+# * When you see "changes" in some of the submodule folders after pulling.
+#   This indicates a version update.
+#
+# This repo should have been configured with the following command:
+#
+#   git config submodule.recurse true
+mod:
+# 	git reset mod
+	git submodule update --init --recursive --quiet
+
+define HOOK_MOD_UPDATE
+#!/bin/sh
+git submodule update --init --recursive --quiet
+endef
+export HOOK_MOD_UPDATE
+
+# Should be run once, after cloning the repo.
+hooks:
+ifneq ($(OS),Windows_NT)
+	echo "$${HOOK_MOD_UPDATE}" > .git/hooks/post-merge
+	chmod +x .git/hooks/post-merge
+	echo "$${HOOK_MOD_UPDATE}" > .git/hooks/post-checkout
+	chmod +x .git/hooks/post-checkout
+endif
+
+init: mod hooks
