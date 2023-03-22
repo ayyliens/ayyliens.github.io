@@ -1,0 +1,17 @@
+.DS_Store
+/*
+
+!/*rc
+!/*ignore
+!/*.md
+!/.gitmodules
+!/.dprint.json
+!/importmap.json
+!/makefile
+
+!/.github
+!/css
+!/img
+!/js
+!/mod
+!/static
