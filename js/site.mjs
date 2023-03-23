@@ -75,7 +75,7 @@ class PageIndex extends Page {
           new u.Raw(`
             <iframe src="https://discord.com/widget?id=1087685803318181890&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
           `),
-        )
+        ),
       )
     )
   }

@@ -18,4 +18,8 @@ We will keep the community updated on our progress and hope to share examples of
 We cordially invite you to join us on our journey. We would greatly appreciate any assistance in discussing ideas, making attempts, writing code, or providing financial support.
 
 If you wish to stay connected and be updated on our progress, you can subscribe.
+
+Check our GitHub repository [https://github.com/ayyliens](https://github.com/ayyliens)
+
+Join Discord channel
 `
