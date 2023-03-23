@@ -1,0 +1,102 @@
+.row-sta-sta {@include flex-layout(row, sta, sta)}
+.row-sta-cen {@include flex-layout(row, sta, cen)}
+.row-sta-end {@include flex-layout(row, sta, end)}
+.row-sta-str {@include flex-layout(row, sta, str)}
+
+.row-cen-sta {@include flex-layout(row, cen, sta)}
+.row-cen-cen {@include flex-layout(row, cen, cen)}
+.row-cen-end {@include flex-layout(row, cen, end)}
+.row-cen-str {@include flex-layout(row, cen, str)}
+
+.row-end-sta {@include flex-layout(row, end, sta)}
+.row-end-cen {@include flex-layout(row, end, cen)}
+.row-end-end {@include flex-layout(row, end, end)}
+
+.row-bet-sta {@include flex-layout(row, bet, sta)}
+.row-bet-cen {@include flex-layout(row, bet, cen)}
+.row-bet-end {@include flex-layout(row, bet, end)}
+.row-bet-str {@include flex-layout(row, bet, str)}
+
+.col-sta-sta {@include flex-layout(col, sta, sta)}
+.col-sta-cen {@include flex-layout(col, sta, cen)}
+.col-sta-end {@include flex-layout(col, sta, end)}
+.col-sta-str {@include flex-layout(col, sta, str)}
+
+.col-cen-sta {@include flex-layout(col, cen, sta)}
+.col-cen-cen {@include flex-layout(col, cen, cen)}
+
+.col-end-sta {@include flex-layout(col, end, sta)}
+.col-end-cen {@include flex-layout(col, end, cen)}
+
+.col-bet-sta {@include flex-layout(col, bet, sta)}
+.col-bet-cen {@include flex-layout(col, bet, cen)}
+.col-bet-end {@include flex-layout(col, bet, end)}
+.col-bet-str {@include flex-layout(col, bet, str)}
+
+// Flex Display
+.flex        {@include dis-flex}
+.inl-flex    {@include dis-inl-flex}
+
+// Flex Direction
+.row         {@include flex-dir(row)}
+.col         {@include flex-dir(col)}
+
+// Flex Wrap
+.flex-wrap   {@include flex-wrap}
+.flex-nowrap {@include flex-nowrap}
+
+// Flex Size
+.flex-0      {@include flex(0 0)}
+.flex-1      {@include flex(1 0)}
+.flex-2      {@include flex(2 0)}
+.flex-3      {@include flex(3 0)}
+.flex-noshrink {@include flex-shrink(0)}
+
+// Flex Order
+.ord-0       {@include ord(0)}
+.ord-1       {@include ord(1)}
+.ord-2       {@include ord(2)}
+
+@include media-xl {
+  .xl-row-sta-cen {@include flex-layout(row, sta, cen)}
+  .xl-row-bet-sta {@include flex-layout(row, bet, sta)}
+  .xl-col-sta-sta {@include flex-layout(col, sta, sta)}
+}
+@include media-lg {
+  .lg-row-sta-cen {@include flex-layout(row, sta, cen)}
+  .lg-row-cen-str {@include flex-layout(row, cen, str)}
+  .lg-col-sta-sta {@include flex-layout(col, sta, sta)}
+  .lg-col-sta-cen {@include flex-layout(col, sta, cen)}
+  .lg-col-cen-cen {@include flex-layout(col, cen, cen)}
+  .lg-flex-wrap   {@include flex-wrap}
+  .lg-ord-1       {@include ord(1)}
+  .lg-ord-2       {@include ord(2)}
+}
+@include media-md {
+  .md-col-sta-sta {@include flex-layout(col, sta, sta)}
+  .md-col-sta-cen {@include flex-layout(col, sta, cen)}
+  .md-col-sta-end {@include flex-layout(col, sta, end)}
+  .md-ord-0       {@include ord(0)}
+  .md-ord-1       {@include ord(1)}
+}
+@include media-ls {
+  .ls-row-sta-cen {@include flex-layout(row, sta, cen)}
+  .ls-row-cen-cen {@include flex-layout(row, cen, cen)}
+  .ls-row-bet-cen {@include flex-layout(row, bet, cen)}
+  .ls-row-end-cen {@include flex-layout(row, end, cen)}
+  .ls-col-sta-sta {@include flex-layout(col, sta, sta)}
+  .ls-col-sta-cen {@include flex-layout(col, sta, cen)}
+  .ls-col-sta-end {@include flex-layout(col, sta, end)}
+  .ls-col-cen-cen {@include flex-layout(col, cen, cen)}
+  .ls-flex-wrap   {@include flex-wrap}
+  .ls-ord-1       {@include ord(1)}
+  .ls-ord-2       {@include ord(2)}
+  .ls-ord-3       {@include ord(3)}
+}
+@include media-sm {
+  .sm-col-sta-sta {@include flex-layout(col, sta, sta)}
+  .sm-col-sta-cen {@include flex-layout(col, sta, cen)}
+  .sm-col-cen-cen {@include flex-layout(col, cen, cen)}
+  .sm-ord-1       {@include ord(1)}
+  .sm-ord-2       {@include ord(2)}
+}

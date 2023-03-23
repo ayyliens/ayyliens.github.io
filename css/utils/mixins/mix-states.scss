@@ -1,0 +1,22 @@
+@mixin hover          {&:hover, .enable-focus-indicators &:focus {@content}}
+@mixin focus          {&:focus {@content}}
+@mixin active         {&:active {@content}}
+@mixin busy           {&:hover, .enable-focus-indicators &:focus, &:active {@content}}
+@mixin if-href        {&[href]:not([href='']) {@content}}
+@mixin if-button      {&[role='button']:not([disabled]):not([readonly]) {@content}}
+@mixin checked        {&:checked, &[aria-checked=true] {@content}}
+@mixin disabled       {&:disabled, &[disabled], &.--disabled, &[readonly], [disabled] & {@content}}
+@mixin not-disabled   {&:not(:disabled):not([disabled]):not([readonly]):not(.--disabled) {@content}}
+// https://www.w3.org/TR/wai-aria-1.1/#aria-current
+// [aria-current='']         = not current
+// [aria-current=false]      = not current
+// [aria-current=undefined]  = not current
+// [aria-current=<other>]    = current
+@mixin if-current       {&[aria-current]:not([aria-current='']):not([aria-current=false]) {@content}}
+@mixin if-not-current   {&:not([aria-current]), &[aria-current=''], &[aria-current=false] {@content}}
+@mixin if-current-href  {@include if-current {@include if-href {@content}}}
+@mixin if-checked       {&[aria-checked]:not([aria-checked='']):not([aria-checked=false]) {@content}}
+@mixin if-not-checked   {&:not([aria-checked]), &[aria-checked=''], &[aria-checked=false] {@content}}
+@mixin if-selected      {&[aria-selected]:not([aria-selected='']):not([aria-selected=false]) {@content}}
+@mixin if-not-selected  {&:not([aria-selected]), &[aria-selected=''], &[aria-selected=false] {@content}}
+@mixin if-expanded      {&[aria-expanded]:not([aria-expanded='']):not([aria-expanded=false]) {@content}}

@@ -1,0 +1,301 @@
+html {
+  font-family: source-serif-pro, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: var(--default-font-size);
+}
+
+$sup-sub:  0.25em;
+strong, b {font-weight: bold !important}
+sup       {top: -$sup-sub}
+sub       {top: $sup-sub}
+
+// Font Size
+// TODO: Responsive And Fluid Typography With vh And vw Units
+.font-p           {@extend .font-norm, .line-sparse}
+.font-norm        {@include resp-font( 16,  16,  15,  15)} // TODO better name.
+.font-h3          {@include resp-font( 18,  18,  17,  17)}
+.font-h2          {@include resp-font( 24,  22,  20,  19)}
+.font-h1          {@include resp-font( 40,  32,  28,  24)}
+.font-giant       {@include resp-font( 64,  48,  48,  36)}
+.font-extra-giant {@include resp-font(100, 100,  48,  48)}
+.font-404         {@include resp-font(312, 260, 220, 156)}
+
+.font-inherit     {font-size: inherit}
+.font-60p         {font-size: 60%;line-height: 1.1}
+.font-tiny        {@include font-tiny}
+.font-extra-small {@include font-extra-small}
+.font-small       {@include font-small}
+.font-std         {@include font-std}
+.font-std-adp     {@extend .font-std, .ls-font-small, .sm-font-extra-small}
+.font-medium      {@include font-medium}
+.font-large       {@include font-large}
+.font-extra-large {@include font-extra-large}
+.font-big         {@include font-big}
+.font-huge        {@include font-huge}
+
+// Svg Size
+.font-medium-svg  {> svg {@include font-medium}}
+
+// Font Family
+.font-fam-std *   {font-family: 'Lato'}
+.font-fam-inter   {font-family: 'Inter'}
+.font-fam-ssp     {font-family: 'Source Serif Pro'}
+.font-fam-mono    {font-family: SF Mono, Menlo, Monaco, DejaVu Sans Mono, Consolas, monospace}
+
+// Line Height
+.line-dense       {line-height: 0.8}
+.line-normal      {line-height: 1}
+.line-sparse      {line-height: var(--line-height)}
+
+// Font Weight
+.wei-thin         {font-weight: var(--wei-thin)}
+.wei-reg          {font-weight: var(--wei-reg)}
+.wei-reg-imp      {font-weight: var(--wei-reg) !important}
+.wei-bolder       {font-weight: var(--wei-bolder)}
+.wei-bold         {font-weight: var(--wei-bold)}
+.wei-black        {font-weight: var(--wei-black)}
+
+// Text Shadow
+.text-shad-white {
+  text-shadow:
+    1px 0 1px var(--col-def-white),
+    0 1px 1px var(--col-def-white),
+    1px 1px 1px var(--col-def-white),
+    -1px 0 1px var(--col-def-white),
+    0 -1px 1px var(--col-def-white),
+    -1px -1px 1px var(--col-def-white);
+}
+
+// Text Align
+.text-left        {@include text-left}
+.text-center      {@include text-center}
+.text-right       {@include text-right}
+.text-justify     {@include text-justify}
+
+// Text Transform
+.trans-none       {text-transform: none}
+.trans-init       {text-transform: initial}
+.trans-upper      {@include trans-upper}
+.trans-lower      {text-transform: lowercase}
+.trans-cap        {text-transform: capitalize}
+
+// Text Decoration
+.dec-none         {text-decoration: none}
+.dec-over         {text-decoration: overline}
+.dec-under        {text-decoration: underline}
+.dec-strike       {text-decoration: line-through}
+.dec-und-hov-none {@extend .dec-under, .hover-dec-none}
+.dec-none-hov-und {@extend .dec-none, .hover-dec-under}
+.hover-dec-under  {@include hover {@extend .dec-under}}
+.hover-dec-none   {@include hover {@extend .dec-none}}
+
+// Style
+.font-normal      {font-style: normal}
+.font-italic      {font-style: italic}
+.font-oblique     {font-style: oblique}
+
+//
+.wb-break-all     {word-break: break-all}
+.wb-break-word    {word-break: break-word}
+.ws-pre           {white-space: pre}
+.ws-pre-wrap      {white-space: pre-wrap}
+.ws-normal        {white-space: normal}
+.ws-nowrap        {@include ws-nowrap}
+
+.vertical-text {
+  @extend .wb-break-all;
+  @extend .text-center;
+  width: 1ch;
+}
+
+.text-over-ellipsis {text-overflow: ellipsis}
+
+// Caution: may also require `display` non-`inline`, such as `inline-block`
+// or `inline-flex`.
+.text-ellipsis {@extend .text-over-ellipsis, .ws-nowrap, .over-hidden, .w-full}
+
+.text-normal {@extend .font-normal, .wei-reg, .dec-none}
+
+.iframe-video {
+  aspect-ratio: 16/9;
+  @extend .w-full;
+}
+
+// Responsive Typography
+.responsive-typography {
+  @extend .wb-break-word;
+
+  h1, h2, h3,
+  h4, h5, h6  {@extend .wei-bold}
+  h1          {@extend .font-h1; @extend .mar-t-1;}
+  h2          {@extend .font-h2; @extend .mar-t-0x5;}
+  h3, h4      {@extend .font-h3}
+  h5, h6      {@extend .font-p}
+  h6          {@extend .fg-accent, .trans-upper}
+  
+  iframe {@extend .round-std-x2, .iframe-video}
+  
+  img {@extend .col-cen-cen, .bg-faded, .round-std-x2, .maw-full}
+
+  blockquote {
+    @extend .bg-white;
+    @extend .border-accent-l-5;
+    @extend .round-std-x2;
+    @extend .shad-std;
+    @extend .relative;
+    @extend .w-full;
+    @extend .pad-v-1x5;
+    @extend .pad-h-2x5;
+
+    @include before-after {
+      @extend .fg-accent;
+      font-size: 4rem;
+      @extend .z-index-1;
+    }
+
+    @include before('“')  {
+      @extend .mar-t-2x5, .mar-l-0x5, .abs-t-l;
+      @include media-md {margin: 1.5rem 0 0 0.5rem}
+    }
+    @include after('”')   {
+      @extend .mar-b-0x5, .mar-r-0x5, .abs-b-r;
+      @include media-md {margin: 0 0.5rem -0.25rem 0}
+    }
+    
+    @include media-md {@include pad-h(1)}
+  }
+
+  &:not(.--big) {
+    > div, p, li {
+      @extend .font-p;
+    }
+  }
+
+  &.--big {
+    > div, p, li {
+      @extend .font-extra-large;
+    }
+  }
+
+  a {
+    @extend .fg-accent, .maw-full, .dec-none-hov-und;
+    @include mah(22);
+    
+    &.--with-img {
+      @extend .col-cen-cen, .bg-faded, .border-pale-1, .round-std-x2, .over-hidden, .w-full;
+      
+      img {@extend .cen-by-mar, .full-sz-max}
+    }
+  }
+
+  b, strong {@extend .wei-bold}
+
+  code {@extend .bg-faded, .fg-graphite, .border-primary-1, .round-std, .inline-block, .pad-h-0x25}
+
+  // `<pre><code>` is generated by `marked`.
+  pre > code {@extend .pad-v-0x5, .pad-h-1}
+
+  i, em {@extend .font-italic}
+
+  ul, ol {
+    @extend .w-full;
+
+    li {
+      @extend .relative, .mih-1, .pad-l-1x5;
+      @include before {@extend .abs-t-l}
+    }
+
+    ul, ol {@extend .mar-t-0x5}
+  }
+
+  ul {
+    > li {
+      @include before {@extend .bg-current-color, .circle, .sqr-0x5, .mar-t-0x5, .mar-l-0x25}
+    }
+  }
+
+  ol {
+    counter-reset: num;
+
+    > li {
+      @extend .pad-l-2;
+
+      @include before {
+        content: counter(num) '.';
+        counter-increment: num;
+      }
+    }
+  }
+  
+  &:not(.--small-gap) {
+    iframe[src*='//commons.wikimedia.org/'],
+    iframe[src*='https://www.youtube.com/embed/'] {
+      height: px-to-rem(520) !important;
+      @include media-xl  {height: px-to-rem(480) !important}
+      @include media-lg  {height: px-to-rem(420) !important}
+      @include media-lmd {height: px-to-rem(360) !important}
+      @include media-md  {height: px-to-rem(300) !important}
+      @include media-sm  {height: px-to-rem(260) !important}
+    }
+  
+    img {
+      @extend .maw-full, .cen-by-mar;
+  
+      // Some images in articles have `[width]` and `[height]` attributes with
+      // pixel values. In combination with our width adjustment, this causes
+      // them to be squished and distorted horizontally. We need to reset the
+      // height to prevent it. This only works when `[height]` is set through
+      // its own attribute rather than `[style]`.
+      height: initial;
+    }
+    
+    > * + * {@extend .mar-t-1}
+    > div + div,
+    p + p   {@extend .mar-t-1}
+    li + li {@extend .mar-t-0x25}
+  }
+  
+  &.--small-gap {
+    p {@extend .w-full, .over-hidden}
+    pre > code {@extend .font-p}
+    > * + * {@extend .mar-t-1}
+    li + li {@extend .mar-t-0x25}
+  }
+}
+
+@include media-lg {
+  .lg-font-tiny         {@include font-tiny}
+  .lg-font-extra-small  {@include font-extra-small}
+  .lg-font-small        {@include font-small}
+  .lg-font-large        {@include font-large}
+  .lg-text-center       {@include text-center}
+}
+
+@include media-md {
+  .md-font-small        {@include font-small}
+  .md-text-center       {@include text-center}
+  .md-trans-upper       {@include trans-upper}
+  .md-ws-nowrap         {@include ws-nowrap}
+}
+
+@include media-ls {
+  .ls-font-tiny         {@include font-tiny}
+  .ls-font-extra-small  {@include font-extra-small}
+  .ls-font-small        {@include font-small}
+  .ls-font-std          {@include font-std}
+  .ls-text-center       {@include text-center}
+  .ls-text-left         {@include text-left}
+}
+
+@include media-sm {
+  .sm-font-large        {@include font-large}
+  .sm-font-extra-small  {@include font-extra-small}
+  .sm-font-small        {@include font-small}
+  .sm-font-std     {@include font-std}
+  .sm-text-center       {@include text-center}
+  .sm-text-left         {@include text-left}
+}
+
+// TODO Write all combinations
+.let-spa-sm {
+  letter-spacing: -2px;
+}

@@ -1,0 +1,251 @@
+// General
+.miw-narrow         {min-width: $page-min-width}
+
+// Misc
+.adaptive-width {
+  @extend .w-full;
+
+  &:not(.--no-pad) {
+    @include media-lg {@include pad-h(1.25)}
+    @include media-md {@include pad-h(1)}
+  }
+
+  @include media-lg {
+    width: calc(100% + 2.5rem) !important;
+    @include mar-h(-1.25);
+  }
+
+  @include media-md {
+    width: calc(100% + 2rem) !important;
+    @include mar-h(-1);
+  }
+}
+
+// Max Width
+.maw-col-1          {@include maw-col(1)}
+.maw-col-1x5        {@include maw-col(1.5)}
+.maw-col-2          {@include maw-col(2)}
+.maw-col-2x5        {@include maw-col(2.5)}
+.maw-col-3          {@include maw-col(3)}
+.maw-col-3x5        {@include maw-col(3.5)}
+.maw-col-4          {@include maw-col(4)}
+.maw-col-4x5        {@include maw-col(4.5)}
+.maw-col-5          {@include maw-col(5)}
+.maw-col-6          {@include maw-col(6)}
+.maw-col-7          {@include maw-col(7)}
+.maw-col-8          {@include maw-col(8)}
+.maw-col-9          {@include maw-col(9)}
+.maw-col-10         {@include maw-col(10)}
+.maw-col-11         {@include maw-col(11)}
+.maw-col-12         {@include maw-col(12)}
+.maw-full           {max-width: 100%}
+
+// Min Width
+.miw-col-0x75       {@include miw-col(0.75)}
+.miw-col-1          {@include miw-col(1)}
+.miw-col-1x5        {@include miw-col(1.5)}
+.miw-col-2          {@include miw-col(2)}
+.miw-col-2x5        {@include miw-col(2.5)}
+.miw-col-3          {@include miw-col(3)}
+.miw-col-3x5        {@include miw-col(3.5)}
+.miw-col-4          {@include miw-col(4)}
+.miw-col-4x5        {@include miw-col(4.5)}
+.miw-col-5          {@include miw-col(5)}
+.miw-col-6          {@include miw-col(6)}
+.miw-col-7          {@include miw-col(7)}
+.miw-col-9          {@include miw-col(9)}
+
+// Width
+.w-auto             {width: auto}
+.w-full             {@include w-full}
+.w-0                {@include w(0)}
+.w-0x5              {@include w(0.5)}
+.w-1x25             {@include w(1.25)}
+.w-1x5              {@include w(1.5)}
+.w-2x5              {@include w(2.5)}
+.w-4x5              {@include w(4.5)}
+.w-6x5              {@include w(6.5)}
+.w-6x75             {@include w(6.75)}
+.w-7x5              {@include w(7.5)}
+.w-8x25             {@include w(8.25)}
+.w-10               {@include w(10)}
+.w-11x5             {@include w(11.5)}
+.w-17x5             {@include w(17.5)}
+.w-20               {@include w(20)}
+.w-100vw            {@include w(100vw)}
+
+// Max Height
+.mah-100vh          {max-height: 100vh}
+.mah-full           {max-height: 100%}
+.mah-8              {@include mah(8)}
+.mah-16             {@include mah(16)}
+.mah-24             {@include mah(24)}
+
+// Min Height
+.mih-100vh          {min-height: 100vh}
+.mih-1              {@include mih(1)}
+.mih-1x25           {@include mih(1.25)}
+.mih-1x5            {@include mih(1.5)}
+.mih-2              {@include mih(2)}
+.mih-2x75           {@include mih(2.75)}
+.mih-4              {@include mih(4)}
+.mih-6x5            {@include mih(6.5)}
+.mih-8x5            {@include mih(8.5)}
+.mih-13             {@include mih(13)}
+.mih-15             {@include mih(15)}
+.mih-18             {@include mih(18)}
+.mih-22x5           {@include mih(22.5)}
+.mih-32             {@include mih(32)}
+
+// Height
+.h-auto             {height: auto}
+.h-75vh             {height: 75vh}
+.h-full             {height: 100%}
+.h-1px              {height: 1px}
+.h-0                {@include h(0)}
+.h-0x25             {@include h(0.25)}
+.h-0x75             {@include h(0.75)}
+.h-1x25             {@include h(1.25)}
+.h-1x5              {@include h(1.5)}
+.h-1x75             {@include h(1.75)}
+.h-2                {@include h(2)}
+.h-2x25             {@include h(2.25)}
+.h-2x5              {@include h(2.5)}
+.h-2x75             {@include h(2.75)}
+.h-4                {@include h(4)}
+.h-5x5              {@include h(5.5)}
+.h-6x5              {@include h(6.5)}
+.h-11               {@include h(11)}
+.h-13               {@include h(13)}
+.h-14               {@include h(15)}
+.h-15               {@include h(15)}
+.h-18               {@include h(18)}
+.h-20               {@include h(20)}
+.h-25               {@include h(25)}
+.h-32               {@include h(32)}
+.h-40               {@include h(40)}
+
+// Full Size
+.full-sz-max        {@extend .maw-full, .mah-full}
+.full-sz            {@extend .w-full, .h-full}
+.full-sz-0          {@extend .w-0, .h-0}
+
+// Square
+.sqr-0              {@include sqr(0)}
+.sqr-0x5            {@include sqr(0.5)}
+.sqr-0x75           {@include sqr(0.75)}
+.sqr-1              {@include sqr(1)}
+.sqr-1x25           {@include sqr(1.25)}
+.sqr-1x5            {@include sqr(1.5)}
+.sqr-1x75           {@include sqr(1.75)}
+.sqr-2              {@include sqr(2)}
+.sqr-2x25           {@include sqr(2.25)}
+.sqr-2x5            {@include sqr(2.5)}
+.sqr-2x75           {@include sqr(2.75)}
+.sqr-3x75           {@include sqr(3.75)}
+.sqr-4              {@include sqr(4)}
+.sqr-4x5            {@include sqr(4.5)}
+.sqr-5x75           {@include sqr(5.75)}
+.sqr-7x5            {@include sqr(7.5)}
+.sqr-10             {@include sqr(10)}
+.sqr-12             {@include sqr(12)}
+.sqr-15             {@include sqr(15)}
+
+@include media-xxl {
+  .xxl-maw-col-1x5  {@include maw-col(1.5)}
+  .xxl-maw-col-6    {@include maw-col(6)}
+  .xxl-miw-col-1x5  {@include miw-col(1.5)}
+}
+@include media-xl {
+  .xl-maw-col-1x5   {@include maw-col(1.5)}
+  .xl-maw-col-2     {@include maw-col(2)}
+  .xl-maw-col-12    {@include maw-col(12)}
+  .xl-miw-col-1x5   {@include miw-col(1.5)}
+  .xl-miw-col-2     {@include miw-col(2)}
+  .xl-miw-col-2x5   {@include miw-col(2.5)}
+  .xl-mih-auto      {min-height: 1px}
+  .xl-mih-7         {@include mih(7)}
+  .xl-w-8x5         {@include w(8.5)}
+  .xl-h-12          {@include h(12)}
+  .xl-sqr-7         {@include sqr(7)}
+}
+@include media-lg {
+  .lg-maw-col-2     {@include maw-col(2)}
+  .lg-maw-col-3     {@include maw-col(3)}
+  .lg-maw-col-4     {@include maw-col(4)}
+  .lg-maw-col-5     {@include maw-col(5)}
+  .lg-maw-col-6     {@include maw-col(6)}
+  .lg-maw-col-9     {@include maw-col(9)}
+  .lg-maw-col-12    {@include maw-col(12)}
+  .lg-miw-col-2     {@include miw-col(2)}
+  .lg-miw-col-3     {@include miw-col(3)}
+  .lg-w-9x5         {@include w(9.5)}
+  .lg-mih-15        {@include mih(15)}
+  .lg-mih-18        {@include mih(18)}
+  .lg-h-2x5         {@include h(2.5)}
+  .lg-h-7x5         {@include h(7.5)}
+  .lg-h-20          {@include h(20)}
+  .lg-h-25          {@include h(25)}
+  .lg-h-32          {@include h(32)}
+  .lg-sqr-1x5       {@include sqr(1.5)}
+  .lg-w-full        {@include w-full}
+}
+@include media-md {
+  .md-maw-col-6     {@include maw-col(6)}
+  .md-maw-col-12    {@include maw-col(12)}
+  .md-maw-col-auto  {@include maw-col-auto}
+  .md-miw-col-2     {@include miw-col(2)}
+  .md-miw-col-auto  {@include miw-col-auto}
+  .md-w-6           {@include w(6)}
+  .md-w-16          {@include w(16)}
+  .md-h-13          {@include h(13)}
+  .md-h-23x75       {@include h(23.75)}
+  .md-h-30          {@include h(30)}
+}
+@include media-ls {
+  .ls-maw-col-4     {@include maw-col(4)}
+  .ls-maw-col-12    {@include maw-col(12)}
+  .ls-maw-col-auto  {@include maw-col-auto}
+  .ls-miw-col-1x5   {@include miw-col(1.5)}
+  .ls-miw-col-2     {@include miw-col(2)}
+  .ls-miw-col-2x5   {@include miw-col(2.5)}
+  .ls-miw-col-auto  {@include miw-col-auto}
+  .ls-w-full        {@include w-full}
+  .ls-w-1x5         {@include w(1.5)}
+  .ls-w-2           {@include w(2)}
+  .ls-mah-4         {@include mah(4)}
+  .ls-mih-1x5       {@include mih(1.5)}
+  .ls-mih-2         {@include mih(2)}
+  .ls-mih-4         {@include mih(4)}
+  .ls-h-0x75        {@include h(0.75)}
+  .ls-h-1           {@include h(1)}
+  .ls-h-1x75        {@include h(1.75)}
+  .ls-h-2           {@include h(2)}
+  .ls-h-8           {@include h(8)}
+  .ls-h-10          {@include h(10)}
+  .ls-h-16          {@include h(16)}
+  .ls-h-20          {@include h(20)}
+  .ls-sqr-1         {@include sqr(1)}
+  .ls-sqr-1x25      {@include sqr(1.25)}
+  .ls-sqr-1x5       {@include sqr(1.5)}
+  .ls-sqr-2         {@include sqr(2)}
+  .ls-sqr-2x75      {@include sqr(2.75)}
+  .ls-sqr-4x5       {@include sqr(4.5)}
+}
+@include media-sm {
+  .sm-maw-col-1x5   {@include maw-col(1.5)}
+  .sm-maw-col-2     {@include maw-col(2)}
+  .sm-maw-col-2x5   {@include maw-col(2.5)}
+  .sm-maw-col-6     {@include maw-col(6)}
+  .sm-miw-col-1     {@include miw-col(1)}
+  .sm-miw-col-1x5   {@include miw-col(1.5)}
+  .sm-miw-col-2x5   {@include miw-col(2.5)}
+  .sm-w-full        {@include w-full}
+  .sm-w-6           {@include w(6)}
+  .sm-w-9x5         {@include w(9.5)}
+  .sm-h-6           {@include h(6)}
+  .sm-h-9           {@include h(9)}
+  .sm-h-13          {@include h(13)}
+  .sm-sqr-1x5       {@include sqr(1.5)}
+  .sm-sqr-2         {@include sqr(2)}
+}

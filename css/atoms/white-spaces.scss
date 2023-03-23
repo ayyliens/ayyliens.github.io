@@ -1,0 +1,334 @@
+.cen-by-mar         {margin-left: auto; margin-right: auto}
+
+// Standards For Cards
+.gap-v-cards        {@extend .gap-v-sm, .ls-gap-v-xs}
+.pad-b-cards        {@extend .pad-b-1, .ls-pad-b-0x5}
+
+// Mar
+.mar-0x25           {@include mar(0.25)}
+
+// Mar V
+.mar-v-0x25        {@include mar-v(0.25)}
+.mar-v-1           {@include mar-v(1)}
+.mar-v-2           {@include mar-v(2)}
+
+// Mar H
+.mar-h-0x25         {@include mar-h(0.25)}
+.mar-h-1            {@include mar-h(1)}
+
+// Mar T
+.mar-t-0x25         {@include mar-t(0.25)}
+.mar-t-0x5          {@include mar-t(0.5)}
+.mar-t-0x75         {@include mar-t(0.75)}
+.mar-t-1            {@include mar-t(1)}
+.mar-t-1-all        {> * {@extend .mar-t-1}}
+.mar-t-1x5          {@include mar-t(1.5)}
+.mar-t-2x5          {@include mar-t(2.5)}
+.mar-t-8            {@include mar-t(8)}
+
+// Mar R
+.mar-r-0x25         {@include mar-r(0.25)}
+.mar-r-0x5          {@include mar-r(0.5)}
+.mar-r-1            {@include mar-r(1)}
+.mar-r-2x5          {@include mar-r(2.5)}
+.mar-r-2x75         {@include mar-r(2.75)}
+.mar-r-3            {@include mar-r(3)}
+.mar-r-4            {@include mar-r(4)}
+.mar-r-7x75         {@include mar-r(7.75)}
+
+// Mar B
+.mar-b-0x25         {@include mar-b(0.25)}
+.mar-b-0x5          {@include mar-b(0.5)}
+.mar-b-0x75         {@include mar-b(0.75)}
+.mar-b-1            {@include mar-b(1)}
+.mar-b-2            {@include mar-b(2)}
+
+// Mar L
+.mar-l-0x25         {@include mar-l(0.25)}
+.mar-l-0x5          {@include mar-l(0.5)}
+.mar-l-0x75         {@include mar-l(0.75)}
+.mar-l-1            {@include mar-l(1)}
+.mar-l-2            {@include mar-l(2)}
+.mar-l-2x5          {@include mar-l(2.5)}
+.mar-l-4            {@include mar-l(4)}
+
+// Negative Margins
+.mar-t--0x125       {@include mar-t(-0.125)}
+.mar-t--0x25        {@include mar-t(-0.25)}
+.mar-t--0x5         {@include mar-t(-0.5)}
+.mar-t--0x75        {@include mar-t(-0.75)}
+.mar-t--1           {@include mar-t(-1)}
+.mar-t--2           {@include mar-t(-2)}
+.mar-r--0x25        {@include mar-r(-0.25)}
+.mar-r--0x5         {@include mar-r(-0.5)}
+.mar-r--1           {@include mar-r(-1)}
+.mar-r--2x75        {@include mar-r(-2.75)}
+.mar-b--0x125       {@include mar-b(-0.125)}
+.mar-b--0x25        {@include mar-b(-0.25)}
+.mar-b--0x5         {@include mar-b(-0.5)}
+.mar-b--0x75        {@include mar-b(-0.75)}
+.mar-b--1           {@include mar-b(-1)}
+.mar-b--1x25        {@include mar-b(-1.25)}
+.mar-b--3x25        {@include mar-b(-3.25)}
+.mar-l--0x25        {@include mar-l(-0.25)}
+.mar-l--1           {@include mar-l(-1)}
+
+// Child margins
+.chi-mar-t-0x25     {@include chi-mar-t(0.25)}
+
+// Pad
+.pad-0x125          {@include pad(0.125)}
+.pad-0x25           {@include pad(0.25)}
+.pad-0x5            {@include pad(0.5)}
+.pad-0x75           {@include pad(0.75)}
+.pad-1              {@include pad(1)}
+.pad-2              {@include pad(2)}
+.pad-2x5            {@include pad(2.5)}
+.pad-3              {@include pad(3)}
+.pad-4              {@include pad(4)}
+
+// Pad V
+.pad-v-0x125        {@include pad-v(0.125)}
+.pad-v-0x25         {@include pad-v(0.25)}
+.pad-v-0x5          {@include pad-v(0.5)}
+.pad-v-0x75         {@include pad-v(0.75)}
+.pad-v-1            {@include pad-v(1)}
+.pad-v-1x5          {@include pad-v(1.5)}
+.pad-v-2            {@include pad-v(2)}
+.pad-v-2x5          {@include pad-v(2.5)}
+.pad-v-4x5          {@include pad-v(4.5)}
+.pad-v-6            {@include pad-v(6)}
+
+// Pad H
+.pad-h-0            {@include pad-h(0)}
+.pad-h-0x25         {@include pad-h(0.25)}
+.pad-h-0x5          {@include pad-h(0.5)}
+.pad-h-0x75         {@include pad-h(0.75)}
+.pad-h-1            {@include pad-h(1)}
+.pad-h-1x5          {@include pad-h(1.5)}
+.pad-h-2            {@include pad-h(2)}
+.pad-h-2x5          {@include pad-h(2.5)}
+.pad-h-4            {@include pad-h(4)}
+.pad-h-4x5          {@include pad-h(4.5)}
+
+// Pad T
+.pad-t-0            {@include pad-t(0)}
+.pad-t-0x25         {@include pad-t(0.25)}
+.pad-t-0x5          {@include pad-t(0.5)}
+.pad-t-0x75         {@include pad-t(0.75)}
+.pad-t-1            {@include pad-t(1)}
+.pad-t-1x5          {@include pad-t(1.5)}
+.pad-t-2            {@include pad-t(2)}
+.pad-t-2x5          {@include pad-t(2.5)}
+.pad-t-3x25         {@include pad-t(3.25)}
+.pad-t-10           {@include pad-t(10)}
+
+// Pad R
+.pad-r-1            {@include pad-r(1)}
+.pad-r-1x5          {@include pad-r(1.5)}
+.pad-r-2            {@include pad-r(2)}
+.pad-r-2x75         {@include pad-r(2.75)}
+.pad-r-3            {@include pad-r(3)}
+.pad-r-3x75         {@include pad-r(3.75)}
+.pad-r-4            {@include pad-r(4)}
+.pad-r-7            {@include pad-r(7)}
+
+// Pad B
+.pad-b-0            {@include pad-b(0)}
+.pad-b-0x75         {@include pad-b(0.75)}
+.pad-b-1            {@include pad-b(1)}
+.pad-b-1x5          {@include pad-b(1.5)}
+.pad-b-2            {@include pad-b(2)}
+.pad-b-3x25         {@include pad-b(3.25)}
+.pad-b-5x75         {@include pad-b(5.75)}
+
+// Pad L
+.pad-l-0x5          {@include pad-l(0.5)}
+.pad-l-0x75         {@include pad-l(0.75)}
+.pad-l-1            {@include pad-l(1)}
+.pad-l-1x5          {@include pad-l(1.5)}
+.pad-l-2            {@include pad-l(2)}
+.pad-l-2x75         {@include pad-l(2.75)}
+.pad-l-3            {@include pad-l(3)}
+.pad-l-3x75         {@include pad-l(3.75)}
+.pad-l-5            {@include pad-l(5)}
+.pad-l-7            {@include pad-l(7)}
+.pad-l-10           {@include pad-l(10)}
+.pad-l-15           {@include pad-l(15)}
+
+// Gaps V
+.gap-v-none         {@include gap-v(0)}
+.gap-v-tiny         {@include gap-v(0.25)}
+.gap-v-xs           {@include gap-v(0.5)}
+.gap-v-sm           {@include gap-v(1)}
+.gap-v-mid          {@include gap-v(1.5)}
+.gap-v-lg           {@include gap-v(2)}
+.gap-v-xl           {@include gap-v(3)}
+.gap-v-lg-opt       {@include gap-v-opt(2)}
+
+// Gaps H
+.gap-h-none         {@include gap-h(0)}
+.gap-h-tiny         {@include gap-h(0.25)}
+.gap-h-xs           {@include gap-h(0.5)}
+.gap-h-std          {@include gap-h(1)}
+.gap-h-mid          {@include gap-h(1.5)}
+.gap-h-lg           {@include gap-h(2)}
+.gap-h-3            {@include gap-h(3)}
+.gap-h-6            {@include gap-h(6)}
+
+// Gaps H - margin rightd
+.gap-r-h-0x25       {@include gap-r-h(0.25)}
+.gap-r-h-0x5        {@include gap-r-h(0.5)}
+.gap-r-h-std        {@include gap-r-h(1)}
+.gap-r-h-2          {@include gap-r-h(2)}
+
+// Standards
+.gap-v-std          {@include gap-v(0.5);}
+.gap-v-sub-std      {@extend .gap-v-xl, .md-gap-v-lg}
+.pad-v-std {
+  @extend .pad-v-4x5;
+  @include media-lg {@include pad-v(3)}
+  @include media-ls {@include pad-v(2)}
+}
+.pad-t-std {
+  @include pad-t(2.5);
+  @include media-lg {@include pad-t(2)}
+  @include media-ls {@include pad-t(1.5)}
+  @include media-sm {@include pad-t(1.25)}
+}
+
+@include media-xxxl {
+  .xxxl-pad-r-4     {@include pad-r(4)}
+}
+@include media-xxl {
+  .xxl-pad-v-5      {@include pad-v(5)}
+  .xxl-pad-t-6x5    {@include pad-t(6.5)}
+  .xxl-gap-h-mid    {@include gap-h(1.5)}
+}
+@include media-xl {
+  .xl-pad-1x5       {@include pad(1.5)}
+  .xl-pad-h-1x5     {@include pad-h(1.5)}
+  .xl-pad-r-4       {@include pad-r(4)}
+  .xl-pad-l-0       {@include pad-l(0)}
+  .xl-pad-l-0x5     {@include pad-l(0.5)}
+  .xl-pad-l-8       {@include pad-l(8)}
+  .xl-gap-v-xs      {@include gap-v(0.5)}
+  .xl-gap-v-sm      {@include gap-v(1)}
+  .xl-gap-v-mid     {@include gap-v(1.5)}
+  .xl-gap-h-none    {@include gap-h(0)}
+  .xl-gap-h-xs      {@include gap-h(0.5)}
+  .xl-gap-h-std     {@include gap-h(1)}
+  .xl-gap-h-mid     {@include gap-h(1.5)}
+}
+@include media-lg {
+  .lg-mar-t-1x5     {@include mar-t(1.5)}
+  .lg-mar-r-0       {@include mar-r(0)}
+  .lg-mar-r-0x5     {@include mar-r(0.5)}
+  .lg-mar-l-0x5     {@include mar-l(0.5)}
+  .lg-pad-1         {@include pad(1)}
+  .lg-pad-1x5       {@include pad(1.5)}
+  .lg-pad-v-0x5     {@include pad-v(0.5)}
+  .lg-pad-v-1       {@include pad-v(1)}
+  .lg-pad-v-1x5     {@include pad-v(1.5)}
+  .lg-pad-v-2x5     {@include pad-v(2.5)}
+  .lg-pad-h-0       {@include pad-h(0)}
+  .lg-pad-h-0x75    {@include pad-h(0.75)}
+  .lg-pad-h-1       {@include pad-h(1)}
+  .lg-pad-h-1x5     {@include pad-h(1.5)}
+  .lg-pad-h-2x5     {@include pad-h(2.5)}
+  .lg-pad-r-0       {@include pad-r(0)}
+  .lg-pad-r-2x5     {@include pad-r(2.5)}
+  .lg-pad-l-0       {@include pad-l(0)}
+  .lg-gap-v-none    {@include gap-v(0)}
+  .lg-gap-v-xs      {@include gap-v(0.5)}
+  .lg-gap-v-sm      {@include gap-v(1)}
+  .lg-gap-v-mid     {@include gap-v(1.5)}
+  .lg-gap-v-lg      {@include gap-v(2)}
+  .lg-gap-h-none    {@include gap-h(0)}
+  .lg-gap-h-0x25    {@include gap-h(0.25)}
+  .lg-gap-h-xs      {@include gap-h(0.5)}
+  .lg-gap-h-std     {@include gap-h(1)}
+  .lg-gap-h-lg      {@include gap-h(2)}
+  .lg-gap-h-4       {@include gap-h(4)}
+  .lg-gap-r-h-0     {@include gap-r-h(0)}
+}
+@include media-md {
+  .md-mar-0         {@include mar(0)}
+  .md-mar-t-0x5     {@include mar-t(0.5)}
+  .md-mar-t-1       {@include mar-t(1)}
+  .md-mar-r-0x5     {@include mar-r(0.5)}
+  .md-mar-b-0-imp   {margin-bottom: 0 !important}
+  .md-mar-b-0x5     {@include mar-b(0.5)}
+  .md-pad-0x5       {@include pad(0.5)}
+  .md-pad-1         {@include pad(1)}
+  .md-pad-1x5       {@include pad(1.5)}
+  .md-pad-v-1x5     {@include pad-v(1.5)}
+  .md-pad-v-2x5     {@include pad-v(2.5)}
+  .md-pad-h-0x5     {@include pad-h(0.5)}
+  .md-pad-h-1       {@include pad-h(1)}
+  .md-pad-h-2       {@include pad-h(2)}
+  .md-pad-t-2       {@include pad-t(2)}
+  .md-pad-r-0x5     {@include pad-r(0.5)}
+  .md-pad-b-2       {@include pad-b(2)}
+  .md-pad-l-0x5     {@include pad-l(0.5)}
+  .md-pad-l-2x75    {@include pad-l(2.75)}
+  .md-gap-v-xs      {@include gap-v(0.5)}
+  .md-gap-v-sm      {@include gap-v(1)}
+  .md-gap-v-mid     {@include gap-v(1.5)}
+  .md-gap-v-lg      {@include gap-v(2)}
+  .md-gap-h-none    {@include gap-h(0)}
+  .md-gap-h-xs      {@include gap-h(0.5)}
+  .md-gap-r-h-0     {@include gap-r-h(0)}
+  .md-gap-r-h-0x5   {@include gap-r-h(0.5)}
+}
+@include media-ls {
+  .ls-mar-h-0x25    {@include mar-h(0.25)}
+  .ls-mar-t-1       {@include mar-t(1)}
+  .ls-mar-t-2       {@include mar-t(2)}
+  .ls-mar-t-0x5-all {> * {@include mar-t(0.5)}}
+  .ls-mar-b-0-imp   {margin-bottom: 0 !important}
+  .ls-mar-l-0x5     {@include mar-l(0.5)}
+  .ls-mar-l-1       {@include mar-l(1)}
+  .ls-pad-1         {@include pad(1)}
+  .ls-pad-v-0x5     {@include pad-v(0.5)}
+  .ls-pad-v-1x5     {@include pad-v(1.5)}
+  .ls-pad-h-0x25    {@include pad-h(0.25)}
+  .ls-pad-h-0x5     {@include pad-h(0.5)}
+  .ls-pad-h-1       {@include pad-h(1)}
+  .ls-pad-t-0       {@include pad-t(0)}
+  .ls-pad-t-0x5     {@include pad-t(0.5)}
+  .ls-pad-t-1       {@include pad-t(1)}
+  .ls-pad-t-3x25    {@include pad-t(3.25)}
+  .ls-pad-r-0       {@include pad-r(0)}
+  .ls-pad-r-1x75    {@include pad-r(1.75)}
+  .ls-pad-b-0x5     {@include pad-b(0.5)}
+  .ls-pad-b-20      {@include pad-b(20)}
+  .ls-pad-l-0       {@include pad-l(0)}
+  .ls-pad-l-3x5     {@include pad-l(3.5)}
+  .ls-gap-v-none    {@include gap-v(0)}
+  .ls-gap-v-xs      {@include gap-v(0.5)}
+  .ls-gap-v-sm      {@include gap-v(1)}
+  .ls-gap-v-mid     {@include gap-v(1.5)}
+  .ls-gap-v-lg      {@include gap-v(2)}
+  .ls-gap-h-none    {@include gap-h(0)}
+  .ls-gap-h-0x25    {@include gap-h(0.25)}
+  .ls-gap-h-xs      {@include gap-h(0.5)}
+  .ls-gap-h-std     {@include gap-h(1)}
+  .ls-gap-r-h-none  {@include gap-r-h(0)}
+  .ls-gap-r-h-0x25  {@include gap-r-h(0.25)}
+}
+@include media-sm {
+  .sm-mar-t-0       {@include mar-t(0)}
+  .sm-mar-t-1       {@include mar-t(1)}
+  .sm-pad-0x5       {@include pad(0.5)}
+  .sm-pad-1         {@include pad(1)}
+  .sm-pad-v-1x5     {@include pad-v(1.5)}
+  .sm-pad-v-2x5     {@include pad-v(2.5)}
+  .sm-pad-h-0       {@include pad-h(0)}
+  .sm-pad-h-0x5     {@include pad-h(0.5)}
+  .sm-pad-h-1       {@include pad-h(1)}
+  .sm-gap-v-xs      {@include gap-v(0.5)}
+  .sm-gap-v-sm      {@include gap-v(1)}
+  .sm-gap-h-none    {@include gap-h(0)}
+  .sm-gap-h-xs      {@include gap-h(0.5)}
+}

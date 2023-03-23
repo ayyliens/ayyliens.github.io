@@ -1,0 +1,22 @@
+@mixin mar($val)       {margin: #{$val}rem}
+@mixin mar-v($val)     {@include mar-t($val);@include mar-b($val)}
+@mixin mar-h($val)     {@include mar-r($val);@include mar-l($val)}
+@mixin mar-t($val)     {margin-top: #{$val}rem}
+@mixin mar-r($val)     {margin-right: #{$val}rem}
+@mixin mar-b($val)     {margin-bottom: #{$val}rem}
+@mixin mar-l($val)     {margin-left: #{$val}rem}
+@mixin pad($val)       {padding: #{$val}rem}
+@mixin pad-v($val)     {@include pad-t($val);@include pad-b($val)}
+@mixin pad-h($val)     {@include pad-r($val);@include pad-l($val)}
+@mixin pad-t($val)     {padding-top: #{$val}rem}
+@mixin pad-r($val)     {padding-right: #{$val}rem}
+@mixin pad-b($val)     {padding-bottom: #{$val}rem}
+@mixin pad-l($val)     {padding-left: #{$val}rem}
+@mixin chi-mar-t($val) {& > :not([hidden]) {margin-top: #{$val}rem}}
+@mixin non-first       {> :not([hidden]) ~ :not([hidden]) {@content}}
+@mixin non-first-opt   {> .gap:not([hidden]) ~ .gap:not([hidden]) {@content}}
+@mixin gap-v($val)     {@include non-first {@include mar-t($val)}}
+@mixin gap-h($val)     {@include non-first {@include mar-l($val)}}
+@mixin gap-r-h($val)   {> :not(:last-child):not(:only-child) {@include mar-r($val)}}
+@mixin gap-v-opt($val) {@include non-first-opt {@include mar-t($val)}}
+@mixin gap-h-opt($val) {@include non-first-opt {@include mar-l($val)}}

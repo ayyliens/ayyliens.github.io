@@ -1,0 +1,16 @@
+@mixin before($content: '')   {&::before  {content: $content;@content}}
+@mixin after($content: '')    {&::after   {content: $content;@content}}
+@mixin before-after           {&::before, &::after {@content}}
+
+@mixin only-chi               {&:only-child   {@content}}
+@mixin first-chi              {&:first-child  {@content}}
+@mixin last-chi               {&:last-child   {@content}}
+
+@mixin not-only-chi           {&:not(:only-child)   {@content}}
+@mixin not-first-chi          {&:not(:first-child)  {@content}}
+@mixin not-last-chi           {&:not(:last-child)   {@content}}
+
+@mixin first-chi-not-only     {@include first-chi     {@include not-only-chi {@content}}}
+@mixin last-chi-not-only      {@include last-chi      {@include not-only-chi {@content}}}
+@mixin not-first-chi-not-only {@include not-first-chi {@include not-only-chi {@content}}}
+@mixin not-last-chi-not-only  {@include not-last-chi  {@include not-only-chi {@content}}}

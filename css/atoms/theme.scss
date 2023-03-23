@@ -1,0 +1,369 @@
+html {@extend .bg-white, .fg-black}
+
+/*
+This makes SVG icons automatically compatible with foreground colors
+and "interactive" styles.
+
+NOTE: this must be defined before any color classes: .fg-, .bg-, .theme-, etc.
+This way, the inherited color can be overridden with a class directly on the
+SVG element. If this is defined later, inherited colors take priority over
+local ones.
+*/
+.feather {@extend .fg-inherit; stroke: currentColor}
+
+// Foreground
+.fg-inherit       {color: inherit}
+.fg-black         {color: var(--col-def-black)}
+.fg-white         {color: var(--col-def-white)}
+.fg-success       {color: var(--col-def-success)}
+.fg-error         {color: var(--col-def-error)}
+.fg-warning       {color: var(--col-def-warning)}
+.fg-graphite      {color: var(--col-graphite)}
+.fg-primary       {color: var(--col-primary)}
+.fg-warm-gray     {color: var(--col-warm-gray)}
+.fg-pale          {color: var(--col-pale)}
+.fg-faded         {color: var(--col-faded)}
+.fg-accent        {color: var(--col-accent)}
+.fg-accent-light  {color: var(--col-accent-light)}
+.fg-facebook      {color: var(--col-facebook)}
+.fg-google        {color: var(--col-google)}
+
+.fg-green         {color: var(--col-green)}
+
+// States for Foreground
+.hover-fg-black         {@include hover {@extend .fg-black}}
+.hover-fg-white         {@include hover {@extend .fg-white}}
+.hover-fg-primary       {@include hover {@extend .fg-primary}}
+.hover-fg-accent        {@include hover {@extend .fg-accent}}
+.hover-fg-accent-light  {@include hover {@extend .fg-accent-light}}
+
+// Background
+.bg-transparent     {background-color: transparent}
+.bg-current-color   {background-color: currentColor}
+.bg-white           {background-color: var(--col-def-white)}
+.bg-white-0x66      {background-color: var(--col-def-white-0x66)}
+.bg-white-0x75      {background-color: var(--col-def-white-0x75)}
+.bg-white-0x90      {background-color: var(--col-def-white-0x90)}
+.bg-black           {background-color: var(--col-def-black)}
+.bg-black-0x66      {background-color: var(--col-def-black-0x66)}
+.bg-black-0x75      {background-color: var(--col-def-black-0x75)}
+.bg-black-0x9       {background-color: var(--col-def-black-0x9)}
+.bg-success         {background-color: var(--col-def-success)}
+.bg-error           {background-color: var(--col-def-error)}
+.bg-primary         {background-color: var(--col-primary)}
+.bg-pale            {background-color: var(--col-pale)}
+.bg-faded           {background-color: var(--col-faded)}
+.bg-accent          {background-color: var(--col-accent)}
+.bg-accent-light    {background-color: var(--col-accent-light)}
+.bg-gradient-55x86  {background: linear-gradient(to bottom, rgba(0, 0, 0, 0.26) 55%, rgba(0, 0, 0, 0) 86%)}
+.bg-transparent-imp {background-color: transparent !important}
+.bg-warm-gray       {background-color: var(--col-warm-gray)}
+
+.bg-faded-nth-child-odd {
+  &:nth-child(even) {@extend .bg-white}
+  &:nth-child(odd)  {@extend .bg-faded}
+}
+
+.bg-faded-nth-child-even {
+  &:nth-child(odd)  {@extend .bg-white}
+  &:nth-child(even) {@extend .bg-faded}
+}
+
+.bg-green           {background-color: var(--col-green)}
+
+
+// States for Background
+.hover-bg-white        {@include hover  {@extend .bg-white}}
+.hover-bg-accent       {@include hover  {@extend .bg-accent}}
+.hover-bg-accent-light {@include hover  {@extend .bg-accent-light}}
+.hover-bg-pale         {@include hover  {@extend .bg-pale}}
+.hover-bg-faded        {@include hover  {@extend .bg-faded}}
+.pressed-bg-pale       {@include active {@extend .bg-pale}}
+
+.current-bg-faded-fg-accent {
+  @include if-current {
+    @extend .bg-faded;
+    @extend .fg-accent;
+    @extend .cur-def;
+  }
+}
+
+// Shadows
+.shad-light           {box-shadow: 0 4px 5px rgba(0, 0, 0, 0.16)}
+.shad-std             {box-shadow: var(--shad-std)} // 0 4px 10px rgba(0, 0, 0, 0.16);
+.shad-std-x2          {box-shadow: 0 4px 15px rgba(0, 0, 0, 0.32)}
+.hover-shad-std       {@include hover {@extend .shad-std}}
+.shad-sub-std         {box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.07)}
+.hover-shad-std-x2    {@include hover {box-shadow: 0 4px 15px rgba(0, 0, 0, 0.32)}}
+.btn-shadow           {box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.4)}
+.btn-shadow-none      {box-shadow: none}
+
+.btn-darker           {box-shadow: 0 0 0 100vmax inset rgb(255 255 255 / 10%)}
+.btn-darkest          {box-shadow: 0 0 0 100vmax inset rgb(0 0 0 / 10%)}
+
+// Links
+.link-inverse-core {
+  @extend .cur-point;
+  text-underline-offset: 0.25rem;
+  @include not-disabled {@extend .dec-und-hov-none}
+}
+
+.decorate-link {
+  @extend .fg-accent;
+  text-underline-offset: 0.125rem;
+  @include not-disabled {@extend .hover-dec-under}
+}
+.decorate-link-inverse  {@extend .fg-accent, .link-inverse-core}
+.service-link-inverse   {@extend .fg-warm-gray, .link-inverse-core}
+
+.decorate-links-accent a {@extend .decorate-link}
+.box-link {@extend .anim, .hover-bg-accent-light, .pad-1}
+
+.hover-image-link {
+  @extend .round-std-x2, .over-hidden, .relative, .anim;
+  .image-box {@include after {@extend .bg-black-0x66, .abs-fit, .abs-t-100p, .z-index-backward, .h-full}}
+  
+  @include hover {
+    @extend .btn-shadow;
+    .image-box {
+      @include before {@extend .abs-t-100p}
+      @include after  {@extend .abs-t}
+    }
+  }
+}
+
+// Buttons
+// Class for correct displaying SVG icon height
+// (Add this class to the SVG icon parent element)
+.btn-svg-icon {
+  @extend .line-normal;
+  > * {vertical-align: top}
+}
+
+.btn-before-error {
+  @include before {
+    @extend .bg-error;
+    @extend .opacity-0x15;
+  }
+}
+
+.btn-before-white {
+  @include before {
+    @extend .bg-white;
+    @extend .opacity-0x15;
+  }
+}
+
+.btn-before-white-0x5 {
+  @include before {
+    @extend .bg-white;
+    @extend .opacity-0x5;
+  }
+}
+
+.btn {
+  &:not(.--between) {@extend .row-cen-cen, .inl-flex}
+  &.--between {@extend .row-bet-cen}
+
+  @extend .border-transparent-1, .round-std, .cur-point, .over-hidden, .font-std,
+          .btn-svg-icon, .text-center, .relative;
+
+  @include not-disabled {@include active {@include before {@extend .sqr-15}}}
+
+  @include before {
+    border-radius: 100% !important;
+    @extend .circle, .abs-center, .sqr-0;
+    transform-style: flat;
+  }
+
+  > * {@extend .relative}
+
+  &.--big {
+    @extend .h-2x75, .lg-h-2x5, .ls-h-2, .miw-col-1x5;
+    &:not(.--no-pad) {@extend .pad-h-2, .lg-pad-h-1x5, .md-pad-h-1}
+  }
+
+  &.--standard {
+    @extend .h-2, .miw-col-1;
+    &:not(.--no-pad) {@extend .pad-h-1, .lg-pad-h-0x75}
+  }
+
+  &.--tiny {@extend .round-std-half, .h-1x25, .pad-h-0x5, .miw-col-0x75}
+
+  &:not(.--with-icon) {@extend .gap-r-h-0x25}
+  &.--with-icon {@extend .gap-h-xs}
+}
+
+.btn-states {
+    @include not-disabled {
+      @include hover {@extend .btn-darker}
+      // @include focus {@extend .btn-darker}
+      @include active {@extend .btn-darkest}
+    }
+}
+
+.btn-accent {@extend .btn, .btn-accent-theme, .wei-bolder}
+
+.btn-accent-theme {
+  @extend .bg-accent, .fg-white, .btn-states;
+  @include not-disabled {@include active {@extend .btn-before-white}}
+}
+
+.btn-white {
+  @extend .btn, .bg-white, .fg-primary, .btn-states;
+  @include not-disabled {@include active {@extend .btn-before-error}}
+}
+
+.btn-service {
+  @extend .btn, .bg-faded, .btn-states;
+  @include not-disabled {@include active {@extend .btn-before-error}}
+}
+
+.btn-with-border {
+  @extend .btn, .bg-transparent, .border-primary-1, .fg-primary;
+
+  &:not(.--aria) {@include not-disabled {@extend .btn-with-border-busy}}
+
+  &.--aria {
+    @include if-not-current {@extend .btn-with-border-busy}
+
+    @include if-current {
+      @extend .bg-accent, .fg-white, .border-accent-1, .cur-def;
+      @include before {@extend .hidden-imp}
+    }
+  }
+}
+
+.btn-with-border-busy {
+  @include hover {@extend .bg-accent-light}
+  @include focus {@extend .bg-faded, .border-primary-1}
+  @include active {@extend .btn-before-white-0x5}
+}
+
+.btn-with-accent-border {
+  @extend .btn, .bg-transparent, .fg-accent, .border-accent-1;
+
+  @include not-disabled {
+    @include hover {@extend .bg-accent, .fg-white}
+    @include focus {@extend .bg-accent, .fg-white}
+    @include active {@extend .btn-before-white}
+  }
+}
+
+.btn-with-white-border {
+  @extend .btn, .bg-transparent, .fg-white, .border-white-1;
+
+  @include not-disabled {
+    @include hover {@extend .bg-white, .fg-black}
+    @include focus {@extend .bg-white, .fg-black}
+    @include active {@extend .btn-before-error}
+  }
+}
+
+.busy-bg-light-fg-dark {
+  @extend .bg-white, .fg-primary, .anim, .hover-bg-faded, .hover-fg-black, .pressed-bg-pale;
+}
+
+.busy-fg-accent {
+  @extend .fg-accent, .anim;
+  @include not-disabled {@include busy {@extend .fg-accent-light}}
+}
+
+.btn-success {@extend .btn, .bg-success, .fg-white}
+
+.btn-icon {
+  @extend .row-cen-cen, .fg-primary, .border-transparent-1, .btn-svg-icon, .round-std-half;
+  @extend .font-norm, .h-2, .gap-r-h-0x25, .anim;
+  @include miw(2);
+  @include pad-v(0.25);
+  @include pad-h(0.5);
+  @include if-not-checked {@include hover {@extend .bg-faded, .border-accent-light-1, .fg-accent}}
+  @include checked {@extend .bg-faded, .border-accent-light-1, .hover-bg-accent, .hover-fg-white}
+}
+
+.spinner {
+  width: 4.5rem;
+  height: 0.5rem;
+
+  > * {
+    @extend .bg-white, .circle, .abs-t, .z-index-0, .sqr-0x5;
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+
+    @include first-chi {
+      left: 0.5rem;
+      animation: spinner-1 0.6s infinite;
+    }
+
+    &:nth-child(2) {
+      left: 0.5rem;
+      animation: spinner-2 0.6s infinite;
+    }
+
+    &:nth-child(3) {
+      left: 2rem;
+      animation: spinner-2 0.6s infinite;
+    }
+
+    @include last-chi {
+      left: 3.5rem;
+      animation: spinner-3 0.6s infinite;
+    }
+  }
+}
+
+@keyframes spinner-1 {
+  0% {transform: scale(0)}
+  100% {transform: scale(1)}
+}
+
+@keyframes spinner-2 {
+  0% {transform: translate(0, 0)}
+  100% {transform: translate(24px, 0)}
+}
+
+@keyframes spinner-3 {
+  0% {transform: scale(1)}
+  100% {transform: scale(0)}
+}
+
+// Gradients for elements
+.--with-gradient {
+  @extend .relative;
+  
+  > * {@extend .relative}
+  @include before {@extend .abs-fit, .anim}
+  
+  &:not(.--to-top):not(.--to-right) {
+    @include before {
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.75) 50%, rgba(0, 0, 0, 0.65) 100%);
+    }
+  }
+  &.--to-top    {@include before {@extend .gradient-to-top-95x0}}
+  &.--to-right  {@include before {@extend .gradient-to-right-95x0}}
+}
+
+.gradient-45x83 {
+  @include gradient('175deg, rgba(0, 0, 0, 0.62) 45%, rgba(0, 0, 0, 0) 83%')
+}
+
+.gradient-39x98 {
+  @include gradient('110deg, rgba(0, 0, 0, 0) 39%, rgba(0, 0, 0, 0.5) 98%')
+}
+
+.gradient-to-top-95x0 {
+  @include gradient('to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.75) 40%, rgba(0,0,0,0) 100%')
+}
+
+.gradient-to-right-95x0 {
+  @include gradient('to right, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.75) 40%, rgba(0,0,0,0) 100%')
+}
+
+.placeholder {
+  color: currentColor;
+  @extend %disabled;
+}
+
+@include media-md {
+  .md-bg-transparent {background-color: transparent}
+  .md-bg-faded       {background-color: var(--col-faded)}
+}

@@ -1,0 +1,17 @@
+@mixin font($file-name: 'lato', $weight: '400', $family-name: 'Lato') {
+  font-family: '#{$family-name}';
+  src: url('../fonts/#{$file-name}.woff2') format('woff2'),
+       url('../fonts/#{$file-name}.woff')  format('woff');
+  font-weight: #{$weight};
+  font-display: swap;
+  font-style: normal;
+  text-rendering: optimizeLegibility;
+}
+
+@font-face {@include font('lato-thin', '100')}
+@font-face {@include font}
+@font-face {@include font('lato-bold', '700')}
+@font-face {@include font('lato-black', '800')}
+@font-face {@include font('TrajanPro3Regular', '400', 'Trajan')}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;800&family=Source+Serif+Pro&display=swap');

@@ -1,0 +1,155 @@
+.static   {position: static}
+.relative {position: relative}
+.absolute {position: absolute}
+.fixed    {position: fixed}
+.sticky   {position: -webkit-sticky;position: sticky}
+
+.top-0 {top: 0}
+.rig-0 {right: 0}
+.bot-0 {bottom: 0}
+.lef-0 {left: 0}
+
+.top-1 {top: 1rem}
+.rig-1 {right: 1rem}
+.bot-1 {bottom: 1rem}
+.lef-1 {left: 1rem}
+
+.top-100p {top: 100%}
+.rig-100p {right: 100%}
+.bot-100p {bottom: 100%}
+.lef-100p {left: 100%}
+
+.fit-hor {@extend .rig-0, .lef-0}
+.fit-ver {@extend .top-0, .bot-0}
+.fit     {@extend .fit-hor, .fit-ver}
+
+.top-rig-0 {@extend .top-0, .rig-0}
+.top-lef-0 {@extend .top-0, .lef-0}
+.bot-rig-0 {@extend .bot-0, .rig-0}
+.bot-lef-0 {@extend .bot-0, .lef-0}
+
+.top-rig-1 {@extend .top-1, .rig-1}
+
+.bot--250p {bottom: -250%}
+
+.abs-t        {@extend .absolute, .top-0}
+.abs-t-100p   {@extend .absolute, .top-100p}
+.abs-t-l      {@extend .absolute, .top-lef-0}
+.abs-t-r      {@extend .absolute, .top-rig-0}
+.abs-t-r-1    {@extend .absolute, .top-rig-1}
+.abs-b        {@extend .absolute, .bot-0}
+.abs-b-100p   {@extend .absolute, .bot-100p}
+.abs-b-l      {@extend .absolute, .bot-lef-0}
+.abs-b-r      {@extend .absolute, .bot-rig-0}
+.abs-l        {@extend .absolute, .lef-0}
+.abs-r        {@extend .absolute, .rig-0}
+.abs-fit      {@extend .absolute, .fit}
+.abs-center   {@extend .absolute; @include pos-center}
+.abs-center-x {@extend .absolute; @include pos-center-x}
+.abs-center-y {@extend .absolute; @include pos-center-y}
+.abs-l-1      {@extend .absolute, .top-0, .lef-1}
+
+.fix-t        {@extend .fixed, .top-0}
+.fix-t-l      {@extend .fixed, .top-lef-0}
+.fix-t-r      {@extend .fixed, .top-rig-0}
+.fix-b        {@extend .fixed, .bot-0}
+.fix-b-l      {@extend .fixed, .bot-lef-0}
+.fix-b-r      {@extend .fixed, .bot-rig-0}
+.fix-l        {@extend .fixed, .lef-0}
+.fix-r        {@extend .fixed, .rig-0}
+.fix-fit      {@extend .fixed, .fit}
+.fix-center   {@extend .fixed; @include pos-center}
+.fix-center-x {@extend .fixed; @include pos-center-x}
+.fix-center-y {@extend .fixed; @include pos-center-y}
+
+.lg-bottom-0 {@include media-lg {bottom: 0}}
+
+// Z-index
+.z-index-background   {@include z-index(var(--z-ind-background))} // -100
+.z-index-backward     {@include z-index(var(--z-ind-backward))}   // -1
+.z-index-0            {@include z-index(0)}
+.z-index-1            {@include z-index(1)}
+.z-index-2            {@include z-index(2)}
+.z-index-3            {@include z-index(3)}
+.z-index-select       {@include z-index(var(--z-ind-select))}     // 50
+.z-index-high         {@include z-index(var(--z-ind-high))}       // 100
+.z-index-overlay      {@include z-index(var(--z-ind-overlay))}    // 500
+.z-index-dialog       {@include z-index(var(--z-ind-dialog))}     // 1000
+.z-index-modal        {@include z-index(var(--z-ind-modal))}      // 2000
+.hover-z-index-select {@include hover {@extend .z-index-select}}
+.hover-z-index-dialog {
+  @include hover {
+    @extend .relative;
+    @extend .z-index-dialog;}
+}
+
+// Display
+.block                {@include blk}
+.inline-block         {@include inline-block}
+.show                 {@include blk}
+.show-flex            {@include dis-flex}
+.hidden               {@include d-none}
+.hidden-imp           {@include d-none-imp}
+
+@include hidden-show;
+@include hidden-show-without-z-index;
+
+/*
+Alternative to `[hidden]` for cases where `[hidden]` would break functionality.
+For example, `[hidden]` makes inputs non-interactive. We use invisible inputs
+for custom checkboxes, custom file inputs, and more, and must hide them without
+`[hidden]`. This is also relevant for hidden text used for SEO optimization.
+*/
+.invis {
+  @extend .hidden, .vis-hidden, .full-sz-0, .fixed;
+  right: 100vw;
+}
+
+.columns-3 {
+  column-count: 3;
+  column-gap: 1rem;
+
+  @include media-lg {column-count: 2}
+  @include media-ls {column-count: 1}
+
+  > * {@extend .inline-block}
+}
+
+// TODO Bigger bricks for `xx-(show|hidden)` to work without additional classes.
+// 
+//   * `xx-show` should include `hidden` 
+// 
+//   * `xx-hidden` include `blk`? 
+//     (now it works because element is visible by-default)
+// 
+// Suggestion: `xx-hide`
+
+@include media-xl {
+  .xl-show            {@include blk}
+  .xl-show-flex       {@include dis-flex}
+  .xl-hidden          {@include d-none}
+}
+@include media-lg {
+  .lg-show            {@include blk}
+  .lg-show-flex       {@include dis-flex}
+  .lg-hidden          {@include d-none}
+  .lg-hidden-imp      {@include d-none-imp}
+  @include hidden-show('lg-');
+}
+@include media-md {
+  .md-show            {@include blk}
+  .md-show-flex       {@include dis-flex}
+  .md-hidden          {@include d-none}
+}
+@include media-ls {
+  .ls-hidden          {@include d-none}
+  .ls-show            {@include blk}
+  .ls-show-flex       {@include dis-flex}
+  .ls-relative        {position: relative}
+  @include hidden-show('ls-');
+}
+@include media-sm {
+  .sm-show            {@include blk}
+  .sm-show-flex       {@include dis-flex}
+  .sm-hidden          {@include d-none}
+}

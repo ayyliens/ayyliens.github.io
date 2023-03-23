@@ -1,0 +1,238 @@
+@use "sass:math";
+
+:root {
+  // Default Colors
+  --col-def-white:         hsl(0, 0%, 100%);        // #FFFFFF
+  --col-def-white-0:       hsla(0, 0%, 100%, 0);
+  --col-def-white-0x66:    hsla(0, 0%, 100%, 0.66);
+  --col-def-white-0x75:    hsla(0, 0%, 100%, 0.75);
+  --col-def-white-0x90:    hsla(0, 0%, 100%, 0.90);
+  --col-def-black:         hsl(0, 0%, 0%);          // #000000
+  --col-def-black-0x66:    hsla(0, 0%, 0%, 0.66);
+  --col-def-black-0x75:    hsla(0, 0%, 0%, 0.75);
+  --col-def-black-0x9:     hsla(0, 0%, 0%, 0.9);
+  --col-def-green:                             ;
+
+  --col-def-success:       var(--col-def-green);      // #43a146
+  --col-def-error:         hsl(357, 77%, 39%);      // #B0171F
+  --col-def-warning:       hsl(32, 87%, 54%);       // #F08F23
+  
+  // Theme
+  --col-graphite:          hsl(0, 0%, 13%);         // #212121
+  --col-primary:           hsl(0, 0%, 28%);         // #484848
+  --col-warm-gray:         hsl(0, 0%, 50%);         // #808080
+  --col-pale:              hsl(0, 0%, 86%);         // #DCDCDC
+  --col-faded:             hsl(0, 0%, 96%);         // #F5F5F5
+  --col-accent:            hsl(214, 82%, 51%);      // #1A73E8
+  --col-accent-light:      hsl(218, 58%, 58%);      // #5583d2
+
+  --col-green:             hsl(126, 77%, 38%);      // #17AD26;
+  
+  // Social Brand Colors
+  --col-facebook:          hsl(224, 45%, 47%);      // #425EAC
+  --col-google:            hsl(7, 71%, 54%);        // #DD4B38
+  --col-twitter:           hsl(206, 82%, 63%);      // #55ACEE
+  --col-linkedin:          hsl(201, 100%, 35%);     // #0077B5
+  --col-reddit:            hsl(20, 100%, 50%);      // #FF5700
+  --col-flipboard:         hsl(0, 76%, 52%);        // #E12828
+
+  // Box Shadow
+  --shad-std:              0 4px 10px rgba(0, 0, 0, 0.16);
+
+  // Border Radius
+  --rad-std-half:          #{math.div($radius, 2)};
+  --rad-std:               #{$radius};
+  --rad-std-x2:            #{$radius * 2};
+
+  // Font
+  --default-font-size:      16px;
+  --line-height:            1.5;
+  --wei-thin:               100;
+  --wei-reg:                400;  // Normal = Regular
+  --wei-bolder:             500;
+  --wei-bold:               600;
+  --wei-black:              800;  // Extra Bold = Black
+
+  // Z-index - Must be kept in sync with: * `zIndexDialog` in `layout.js`
+  --z-ind-background:       -100;
+  --z-ind-backward:         -1;
+  --z-ind-select:           100;
+  --z-ind-high:             200;
+  --z-ind-overlay:          400;
+  --z-ind-dialog:           800;
+  --z-ind-modal:            1600; // Because --> https://prnt.sc/12gimt7
+
+  --focus-width:            0.1rem;
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  @include mar(0);
+  @include pad(0);
+}
+
+// Typography
+// Fixed line height reduces the jumping that happens when loading a webfont.
+// `ex` ≈ height of lowercase letter. This property must be set directly on an
+// element rather than inherited, hence the `*`.
+* {
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  text-transform: inherit;
+}
+
+h1, h2, h3, h4, h5, h6, p {line-height: var(--line-height)}
+
+html {
+  @extend .cur-def;
+  font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+pre,
+code,
+kbd {
+  font-family: monospace;
+}
+
+pre {
+  white-space: pre-wrap;
+}
+
+hr {
+  border: 0;
+}
+
+details > summary {
+  cursor: pointer;
+  list-style: none;
+  @include before {@extend .hidden}
+  &::-webkit-details-marker {@extend .hidden}
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+}
+
+a {
+  @extend .cur-point, .dec-none;
+  // Screw default anchor colors! They always mess with themes. Let's decorate
+  // links manually.
+  @extend .fg-inherit;
+}
+
+img {
+  @extend .maw-full;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+
+form,
+input,
+textarea,
+button,
+select,
+option {
+  text-decoration: inherit; // FF
+}
+
+// Eliminates some minor layout glitches
+form {
+  @extend .col-sta-sta;
+  @extend .font-fam-inter;
+}
+
+button {
+  @extend .bg-transparent;
+  @extend .fg-inherit;
+  border: 0;
+  @extend .cur-point;
+  outline: 0;
+  border-radius: 0;
+  &:focus {@extend :focus;}
+  &:active {@extend :focus;} // FF
+  // Questionable. Causes misalignment of SVG icons and possibly other content.
+  > * {vertical-align: middle}
+}
+
+[role="button"] {
+  @extend .cur-point;
+}
+
+[role="slider"] {
+  @extend .cur-point;
+  cursor: grab;
+}
+
+[role="option"] {
+  @extend .cur-point;
+}
+
+input[type="date"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  @extend .hidden;
+}
+
+input[type="number"] {-moz-appearance: none}
+
+input[type="checkbox"],
+input[type="radio"],
+input[type="select"],
+input[type="file"],
+input[type="submit"] {@extend .cur-point}
+
+// In Chrome (version 63 and possibly others), radio inputs shrink, while
+// radio inputs don't.
+input[type="radio"] {@extend .flex-noshrink}
+
+input, textarea {
+  @extend .bg-transparent, .fg-inherit;
+  border: 0;
+}
+
+textarea {resize: none}
+
+input:not([type=checkbox]):not([type=radio]) ,
+input[type="search"]::-webkit-search-decoration {appearance: none}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+:focus {outline: none}
+
+// FF
+::-moz-focus-inner {@extend .border-none}
+
+::placeholder {@extend .placeholder;}
+
+::selection {@extend .bg-primary, .fg-white}
+
+/*
+Increase specificity to allow `[hidden]` to take priority over classes that
+assign the `display` property, for example `display: flex`. Without this
+override, the default specificity of `[hidden]` in the user agent stylesheet is
+lower than anything defined in any custom stylesheet, and the default `[hidden]`
+rule simply does not work.
+*/
+[hidden] {@extend .hidden}
+
+* {@include disabled {@extend %disabled, .cur-not}}

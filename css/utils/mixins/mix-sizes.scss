@@ -1,0 +1,13 @@
+@mixin w-full        {width: 100%}
+@mixin w-auto        {width: auto}
+@mixin maw($val)     {max-width: #{$val}rem}
+@mixin miw($val)     {min-width: #{$val}rem}
+@mixin w($val)       {@include miw($val);width: #{$val}rem}
+@mixin mah($val)     {max-height: #{$val}rem}
+@mixin mih($val)     {min-height: #{$val}rem}
+@mixin h($val)       {height: #{$val}rem}
+@mixin maw-col-auto  {max-width: 100%;@include w-auto}
+@mixin maw-col($val) {max-width: w-col($val);@include w-full}
+@mixin miw-col-auto  {min-width: 1px}
+@mixin miw-col($val) {min-width: w-col($val)}
+@mixin sqr($val)     {flex: 0 0 #{$val}rem;@include w($val);@include mih($val);@include h($val)}

@@ -1,0 +1,18 @@
+@use 'sass:math';
+
+$radius:                0.25rem;
+
+// Layout
+$page-max-width:        1440px;
+$page-max-width-promo:  1660px;
+$page-min-width:        320px;
+
+// Grid
+$content-width:         1440 - (32 * 2);
+$col:                   12;
+$col-gutter:            16;
+$col-width:             math.div(($content-width - $col-gutter * ($col - 1)), $col);
+
+// Animation speed
+$anim-duration-fast:    0.1s;
+$anim-duration-slow:    1s;

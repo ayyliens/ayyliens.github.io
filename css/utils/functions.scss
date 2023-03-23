@@ -1,0 +1,158 @@
+@use 'sass:math';
+
+// https://www.sitepoint.com/hsb-colors-with-sass/
+@function hsb($h-hsb, $s-hsb, $b-hsb, $a: 1) {
+  $l-hsl: ($b-hsb / 2) * (2 - ($s-hsb / 100));
+  $s-hsl: ($b-hsb * $s-hsb) / if($l-hsl < 50, $l-hsl * 2, 200 - $l-hsl * 2);
+  @return hsla($h-hsb, $s-hsl, $l-hsl, $a);
+}
+
+// https://gist.github.com/JacobDB/0ffffaf8e772c12acf7102edb8a302be
+// Encode symbols
+@function url-encode($string) {
+  $map: (
+    "%": "%25",
+    "<": "%3C",
+    ">": "%3E",
+    " ": "%20",
+    "!": "%21",
+    "*": "%2A",
+    "'": "%27",
+    '"': "%22",
+    "(": "%28",
+    ")": "%29",
+    ";": "%3B",
+    ":": "%3A",
+    "@": "%40",
+    "&": "%26",
+    "=": "%3D",
+    "+": "%2B",
+    "$": "%24",
+    ",": "%2C",
+    "/": "%2F",
+    "?": "%3F",
+    "#": "%23",
+    "[": "%5B",
+    "]": "%5D"
+  );
+
+  $new: $string;
+
+  @each $search, $replace in $map {
+    $new: number-to-string($new, $search, $replace);
+  }
+
+  @return $new;
+}
+
+// Format the SVG as a URL
+@function inline-svg($string) {
+  @return url('data:image/svg+xml,#{url-encode($string)}');
+}
+@function inline-feather-svg($string, $color: 'black', $width: '24', $height: '24') {
+  @return inline-svg('<svg xmlns="http://www.w3.org/2000/svg" width="#{$width}" height="#{$height}" viewBox="0 0 #{$width} #{$height}" fill="none" stroke="#{$color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">#{$string}</svg>');
+}
+
+// Gradient Function, Multiple Stops, Different Directions
+//
+// Usage Example
+//
+// @example
+//   .selector {
+//     @include multiple-stops-gradient(
+//        'top',
+//         #ff0000 0%,
+//         #ff9900 20%,
+//         #ffff00 40%,
+//         #66ff33 60%,,
+//         #0000ff 80%,
+//         #9900cc 100%,
+//     );
+//   }
+//
+@mixin multiple-stops-gradient ($args...) {
+
+  $gradient: ();
+  $pos: nth($args, 1);
+  $pos_newsyntax: ();
+
+  @if not is-valid-keyword-direction($pos) {
+    $pos: 'top';
+  }
+
+  @if $pos == 'top' {
+    $pos_newsyntax: 'to bottom';
+  } @else if $pos == 'right' {
+    $pos_newsyntax: 'to left';
+  } @else if $pos == 'bottom' {
+    $pos_newsyntax: 'to top';
+  } @else if $pos == 'left' {
+    $pos_newsyntax: 'to right';
+  }
+
+  @each $g in $args {
+    @if not is-valid-keyword-direction($g) {
+      $gradient: append($gradient, $g, comma);
+    }
+  }
+
+  background-image: -webkit-linear-gradient(unquote($pos), $gradient);
+  background-image:         linear-gradient(unquote($pos_newsyntax), $gradient);
+}
+
+@function is-valid-keyword-direction($value) {
+  @return not not index(
+    'top' 'right' 'bottom' 'left'
+    'to top' 'to right' 'to bottom' 'to left'
+    'to top right' 'to right top'
+    'to bottom right' 'to right bottom'
+    'to top left' 'to left top'
+    'to bottom left' 'to left bottom', $value);
+}
+
+@function number-to-string($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + number-to-string(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+
+  @return $string;
+}
+
+// calculating REM
+@function px-to-rem($px) { @return math.div($px, 16) + rem; }
+@function rem-to-px($rem) { @return $rem * 16; }
+
+// calculating column width with gutter
+@function columnWidthFunction ($numberOfColumns) {
+  @if $numberOfColumns == 1 {
+    @return ($numberOfColumns * $col-width);
+  }
+  @else {
+    @return (($numberOfColumns * $col-width) + (($numberOfColumns - 1) * $col-gutter));
+  }
+}
+
+@function w-col($val) {@return px-to-rem(columnWidthFunction($val))}
+
+// Grid
+@function get-w($n, $space) {
+  @return if(
+      $space > 0,
+      calc((100% - (#{$space} * #{$n - 1})) / #{$n}),
+      calc(100% / #{$n})
+  );
+}
+@function get-full-w($first, $second, $space) {
+  $n: $first + $second;
+  $width: if(
+      $space > 0,
+      '((100% - (#{$space} * #{$n - 1})) / #{$n})',
+      '(100% / #{$n})'
+  );
+  @return calc(#{$first} * #{$width} + #{$space * ($first - 1)});
+}
+@function get-grid-w($cols, $gaps, $width) {
+  @return calc(#{$gaps} * (#{$width} - 1) + (100% - (#{$cols} - 1) * #{$gaps}) / #{$cols} * #{$width});
+}

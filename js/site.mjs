@@ -1,8 +1,10 @@
 // import * as a from '@mitranim/js/all.mjs'
+import {marked} from 'marked'
 import * as c from './conf.mjs'
 import {A, E} from './util.mjs'
 import * as u from './util.mjs'
 import * as v from './view.mjs'
+import * as t from './text.mjs'
 
 export class Site extends u.SiteBase {
   constructor() {
@@ -62,5 +64,14 @@ export class Page404 extends PageErr {
 class PageIndex extends Page {
   fsPathRel() {return `index.html`}
   urlPath() {return `/`}
-  htmlContent() {return `<content here>`}
+  htmlContent() {
+    return E.div.props(A.cls(`col-sta-cen mar-v-2`)).chi(
+      E.img.props(A.cls(`maw-col-1`).src(`/logo.png`)),
+      E.div.props(A.cls(`maw-col-6 gap-v-mid`)).chi(
+        E.div.props(A.cls(`text-justify responsive-typography --big font-fam-ssp`)).chi(
+          new u.Raw(marked(t.intro)),
+        )
+      )
+    )
+  }
 }

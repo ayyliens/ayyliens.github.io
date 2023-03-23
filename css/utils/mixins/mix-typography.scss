@@ -1,0 +1,21 @@
+@mixin resp-font($xxl, $lg, $md, $sm) {
+  font-size: px-to-rem($xxl);
+  @include media-lg {font-size: px-to-rem($lg)}
+  @include media-md {font-size: px-to-rem($md)}
+  @include media-sm {font-size: px-to-rem($sm)}
+}
+@mixin font-tiny        {font-size: px-to-rem(8)}
+@mixin font-extra-small {font-size: px-to-rem(10)}
+@mixin font-small       {font-size: px-to-rem(12)}
+@mixin font-std         {font-size: px-to-rem(14)}
+@mixin font-medium      {font-size: px-to-rem(16)}
+@mixin font-large       {font-size: px-to-rem(18)}
+@mixin font-extra-large {font-size: px-to-rem(20)}
+@mixin font-big         {font-size: px-to-rem(24)}
+@mixin font-huge        {font-size: px-to-rem(30)}
+@mixin text-left        {text-align: left}
+@mixin text-center      {text-align: center}
+@mixin text-right       {text-align: right}
+@mixin text-justify     {text-align: justify}
+@mixin trans-upper      {text-transform: uppercase}
+@mixin ws-nowrap        {white-space: nowrap}

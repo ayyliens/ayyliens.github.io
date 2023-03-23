@@ -1,0 +1,43 @@
+@use 'sass:math';
+
+@mixin grid-children($n, $space-h: 1rem, $space-v: 1rem) {
+  > * {flex-basis: auto}
+  
+  &:not(.--no-mar-t) {
+    > * {
+      @if $n > 0 {
+        margin-top: $space-v;
+      } @else if $n == 1 {
+        @include not-last-chi {margin-top: $space-v}
+      }
+    }
+  }
+  
+  &:not(.--no-mar-r) {
+    > * {
+      width: get-w($n, $space-h);
+      
+      @include media-ls {
+        width: get-w($n, math.div($space-h, 2));
+      }
+      
+      @if $n > 0 {
+        &:not(:nth-child(-n)):not(:last-child) {
+          margin-right: 0;
+        }
+        
+        &:not(:nth-child(#{$n}n)):not(:last-child) {
+          margin-right: $space-h;
+          
+          @include media-ls {
+            margin-right: math.div($space-h, 2);
+          }
+        }
+      }
+    }
+  }
+  
+  &.--no-mar-t {> * {margin-top: 0}}
+  &.--no-mar-r {> * {width: get-w($n, 0)}}
+}
+@mixin make-grid($val) {@include dis-flex; @include flex-wrap; @include grid-children($val)}

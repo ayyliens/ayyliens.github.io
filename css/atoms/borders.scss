@@ -1,0 +1,78 @@
+.round-to-content           {@include brds(_, 99999px)}
+.circle                     {@include circle}
+.round-std-half             {@include brds(_, var(--rad-std-half))}
+// Because --> http://redmine.binarysages.com/issues/5337
+.round-std-t-card-image     {@include brds(t, 0.175rem)}
+.round-std                  {@include brds
+}
+.round-std-x2               {@include brds(_, var(--rad-std-x2))}
+.round-std-t                {@include brds(t)}
+.round-std-r                {@include brds(r)}
+.round-std-b                {@include brds(b)}
+.round-std-l                {@include brds(l)}
+
+.border-transparent-1       {@include brd}
+.border-transparent-20      {@include brd(_, transparent, 20px)}
+.border-transparent-2       {@include brd(_, transparent, 2px)}
+
+.border-current-color-1     {@include brd(_, currentColor)}
+.border-current-color-t-1   {@include brd(t, currentColor)}
+.border-current-color-r-1   {@include brd(r, currentColor)}
+.border-current-color-b-1   {@include brd(b, currentColor)}
+.border-current-color-l-1   {@include brd(l, currentColor)}
+.border-current-color-t-2   {@include brd(t, currentColor, 2px)}
+.border-current-color-l-2   {@include brd(l, currentColor, 2px)}
+
+.border-error-1 {
+  border-color: var(--col-def-error) !important;
+  @include focus {border-color: var(--col-def-error) !important}
+}
+.border-error-2             {border: 2px solid var(--col-def-error) !important;}
+
+.border-success-2           {@include brd(_, var(--col-def-success), 2px)}
+
+.border-white-1             {@include brd(_, var(--col-def-white))}
+
+.border-primary-1           {@include brd(_, var(--col-primary))}
+
+.border-pale-1              {@include brd(_, var(--col-pale))}
+.border-pale-t-1            {@include brd(t, var(--col-pale))}
+.border-pale-r-1            {@include brd(r, var(--col-pale))}
+.border-pale-b-1            {@include brd(b, var(--col-pale))}
+.border-pale-l-1            {@include brd(l, var(--col-pale))}
+.border-pale-2              {@include brd(_, var(--col-pale), 2px)}
+.border-pale-dashed-2       {@include brd(_, var(--col-pale), 2px, dashed)}
+
+.border-faded-1             {@include brd(_, var(--col-faded))}
+.border-faded-r-1           {@include brd(r, var(--col-faded))}
+.border-faded-2             {@include brd(_, var(--col-faded), 2px)}
+.border-faded-b-2           {@include brd(b, var(--col-faded), 2px)}
+
+.border-accent              {border-color: var(--col-accent)}
+.border-accent-1            {@include brd(_, var(--col-accent))}
+.border-accent-t-1          {@include brd(t, var(--col-accent))}
+.border-accent-b-1          {@include brd(b, var(--col-accent))}
+.border-accent-l-1          {@include brd(l, var(--col-accent))}
+.border-accent-2            {@include brd(_, var(--col-accent), 2px)}
+.border-accent-l-5          {@include brd(l, var(--col-accent), 5px)}
+
+.border-accent-light-1      {@include brd(_, var(--col-accent-light))}
+.border-accent-light-2      {@include brd(_, var(--col-accent-light), 2px)}
+
+.hover-border-primary       {@include hover {border-color: var(--col-primary) !important}}
+.hover-border-accent        {@include hover {border-color: var(--col-accent) !important}}
+.hover-border-accent-light  {@include hover {border-color: var(--col-accent-light) !important}}
+.focus-border-primary       {@include focus {border-color: var(--col-primary) !important}}
+.next-item-border-pale-t-1  {> * + * {@extend .border-pale-t-1}}
+
+.border-none                {@include border-none}
+.border-r-none              {border-right-width: 0}
+.border-b-none              {border-bottom-width: 0}
+
+.hr-v                       {@include hr-v()}
+.hr-h                       {@include hr-h()}
+
+@include media-md {
+  .md-border-none           {@include border-none}
+  .md-round-none            {border-radius: 0}
+}

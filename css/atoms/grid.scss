@@ -1,0 +1,46 @@
+@use 'sass:math';
+
+.grid-core {
+  @extend .w-full, .mar-t--1;
+  &:not(.--center) {@extend .row-sta-str, .gap-h-none}
+  &.--center       {@extend .row-cen-str, .gap-h-none}
+}
+.grid-1     {@include make-grid(1)}
+.grid-2     {@include make-grid(2)}
+.grid-3     {@include make-grid(3)}
+.grid-4     {@include make-grid(4)}
+.grid-5     {@include make-grid(5)} // Don't remove - used in the component!
+.grid-6     {@include make-grid(6)}
+.grid-7     {@include make-grid(7)}
+.grid-8     {@include make-grid(8)}
+.grid-12    {@include make-grid(12)}
+
+@include media-xxl {
+  .xxl-grid-3 {@include make-grid(3)}
+}
+@include media-xl {
+  .xl-grid-1  {@include make-grid(1)}
+  .xl-grid-2  {@include make-grid(2)}
+  .xl-grid-3  {@include make-grid(3)}
+}
+@include media-lg {
+  .lg-grid-1  {@include make-grid(1)}
+  .lg-grid-2  {@include make-grid(2)}
+  .lg-grid-3  {@include make-grid(3)}
+  .lg-grid-8  {@include make-grid(8)}
+}
+@include media-md {
+  .md-grid-1  {@include make-grid(1)}
+  .md-grid-2  {@include make-grid(2)}
+  .md-grid-3  {@include make-grid(3)}
+}
+@include media-ls {
+  .ls-grid-1  {@include make-grid(1)}
+  .ls-grid-2  {@include make-grid(2)}
+  .ls-grid-6  {@include make-grid(6)}
+}
+@include media-sm {
+  .sm-grid-1  {@include make-grid(1)}
+  .sm-grid-2  {@include make-grid(2)}
+  .sm-grid-4  {@include make-grid(4)}
+}

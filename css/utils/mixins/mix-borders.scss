@@ -1,0 +1,39 @@
+@mixin circle {border-radius: 50%}
+@mixin border-none {border: 0}
+
+@mixin brd($direction: none, $colour: transparent, $thickness: 1px, $type: solid) {
+  @if      $direction == t {border-top:    $thickness $type $colour}
+  @else if $direction == r {border-right:  $thickness $type $colour}
+  @else if $direction == b {border-bottom: $thickness $type $colour}
+  @else if $direction == l {border-left:   $thickness $type $colour}
+  @else                    {border:        $thickness $type $colour}
+}
+@mixin brds($direction: none, $val: var(--rad-std)) {
+  @if      $direction == t  {border-radius: $val $val 0 0}
+  @else if $direction == r  {border-radius: 0 $val $val 0}
+  @else if $direction == b  {border-radius: 0 0 $val $val}
+  @else if $direction == l  {border-radius: $val 0 0 $val}
+  @else if $direction == tl {border-radius: $val 0 0 0}
+  @else if $direction == tr {border-radius: 0 $val 0 0}
+  @else if $direction == br {border-radius: 0 0 $val 0}
+  @else if $direction == bl {border-radius: 0 0 0 $val}
+  @else                     {border-radius: $val}
+}
+
+@mixin hr-body() {
+  @extend .col-sta-sta, .bg-current-color;
+  @include border-none;
+}
+@mixin hr-h($thickness: 1px) {
+  @include hr-body;
+  @extend .w-full;
+  min-height: $thickness;
+  height: $thickness;
+}
+@mixin hr-v($thickness: 1px) {
+  @include hr-body;
+  align-self: stretch;
+  min-width: $thickness;
+  width: $thickness;
+  height: auto;
+}

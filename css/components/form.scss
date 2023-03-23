@@ -1,0 +1,517 @@
+.form-field-typography {@extend .font-medium, .btn-svg-icon, .wei-bolder, .fg-primary}
+
+.form-elem-busy {
+  @include not-disabled {
+    @include focus {
+      border-width: var(--focus-width);
+      border-color: var(--col-accent);
+    };
+  }
+}
+
+.form-field-pad-h {
+  &:not(.--pad-r-big):not(.--pad-l-big) {@extend .pad-h-1, .md-pad-h-0x5}
+  
+  &.--pad-r-big {@extend .pad-r-3, .pad-l-1, .md-pad-l-0x5}
+  &.--pad-l-big {@extend .pad-r-1, .pad-l-3, .md-pad-r-0x5}
+}
+
+.form-field-pad {@extend .pad-v-0x25, .form-field-pad-h}
+
+.form-label {@extend .col-sta-sta, .text-left, .w-full, .gap-v-xs, .font-fam-inter, .wei-bolder, .fg-graphite}
+
+.form-field-base {
+  @extend .form-field-typography, .bg-white, .w-full, .anim, .form-elem-busy;
+  
+  @include disabled {@extend .bg-faded}
+  
+  &.--error {
+    @extend .border-error-2;
+
+    @include not-disabled {
+      @include focus {outline-color: var(--col-def-error)}
+    }
+  }
+}
+
+.form-field {
+  @extend .form-field-base;
+  &:not(.--post-mode) {@extend .fg-primary, .border-pale-1, .round-std, .form-field-pad}
+  &.--post-mode       {@extend .border-pale-b-1}
+}
+
+.form-input {
+  @extend .form-field;
+  &:not(.--big) {@extend .h-2}
+  &.--big       {@extend .h-2x75}
+}
+
+.form-textarea {
+  @extend .form-field, .pad-v-0x5;
+  
+  &.--small     {@include mih(4)}
+  &.--standard  {@extend .mih-8x5}
+  &.--big       {@extend .mih-22x5}
+}
+
+.form-file-dropzone-label {@extend .form-field-base, .col-cen-cen, .cur-point, .border-pale-dashed-2}
+
+.form-section {@extend .col-sta-sta, .w-full, .pad-b-1x5, .gap-v-mid, .border-pale-b-1}
+
+.form-section-inner {
+  @extend .row-sta-sta, .--no-gap-h, .w-full, .gap-h-std, .md-col-sta-cen, .md-gap-v-sm, .md-gap-h-none;
+}
+
+.form-section-sidebar {
+  @extend .col-sta-sta, .maw-col-2x5, .miw-col-1x5, .gap-v-mid, .md-col-sta-cen, .md-maw-col-12;
+}
+
+.form-section-content {@extend .w-full, .gap-v-sm}
+
+.select-main-cls {
+  @extend .select-list;
+  @extend .select-list-old;
+  @extend .mah-16;
+}
+.select-button {
+  @extend .bg-white;
+  @extend .border-pale-1;
+  @extend .round-std;
+  @extend .form-field-typography;
+  @extend .text-left;
+  @extend .relative;
+  @extend .w-full;
+  @extend .form-field-pad;
+  @extend .anim, .form-elem-busy;
+  
+  > svg {@extend .fg-pale, .font-large}
+}
+.select-parent {
+  @extend .relative;
+  @extend .hover-z-index-select;
+  
+  &.--opened {
+    @extend .z-index-high;
+  }
+}
+.select-list {
+  @extend .over-y-auto, .abs-t-100p, .miw-col-2x5, .w-full;
+  
+  &:not(.--left) {
+    @extend .abs-r;
+    
+    @include media-lmd {
+      right: auto;
+      left: 0;
+    }
+  }
+  
+  &.--left {
+    @extend .abs-l;
+  }
+}
+.select-list-old {
+  @extend .bg-white;
+  @extend .border-pale-1;
+  @extend .round-std;
+  @extend .shad-std;
+  @extend .pad-v-0x5;
+  @extend .fg-primary;
+  // Could include `::-webkit-scrollbar` `::-webkit-scrollbar-thumb` customization.
+}
+.select-item {
+  @extend .row-sta-cen;
+  @extend .cur-point;
+  @extend .form-field-typography;
+  @extend .text-left;
+  @extend .trans-cap;
+  @extend .w-full;
+  @extend .mih-2x75;
+  @extend .form-field-pad;
+  @extend .busy-bg-light-fg-dark;
+  @extend .ls-mih-2;
+  
+  @include if-selected {@extend .bg-faded, .wei-bold}
+}
+
+.radio-circular {
+  @extend .row-sta-cen, .font-norm, .w-full, .mih-1x25, .relative, .pad-l-1x5, .anim;
+  
+  @include before-after {@extend .abs-center-y, .abs-l}
+  
+  @include before {
+    @extend .border-current-color-1;
+    @extend .circle;
+    @extend .sqr-1;
+  }
+  
+  @include after {
+    @extend .bg-current-color;
+    @extend .circle;
+    @extend .opacity-0;
+    @extend .sqr-0x5;
+    
+    left: 0.25rem;
+  }
+  
+  @include not-disabled {
+    @include if-not-current {
+      @include hover {
+        @extend .fg-accent;
+      }
+    }
+    
+    @include if-not-checked {
+      @extend .cur-point;
+      
+      @include hover {
+        @extend .fg-accent;
+      }
+    }
+  }
+  
+  @include if-checked {
+    @extend .fg-accent;
+    @extend .cur-def;
+    
+    @include after {
+      @extend .opacity-1;
+    }
+  }
+  
+  @include disabled {
+    @extend .fg-pale;
+    @extend .cur-not;
+  }
+}
+.radio-button {
+  @extend .row-cen-cen, .bg-white, .cur-point, .font-norm, .text-center, .relative, .mih-2,
+          .pad-v-0x25, .pad-h-0x5, .anim;
+  
+  @include before {
+    @extend .bg-pale;
+    @extend .abs-t-l;
+    width: 1px;
+    @extend .h-full;
+  }
+  
+  @include first-chi {
+    @extend .round-std-l;
+    @include before {@extend .hidden}
+  }
+  
+  @include last-chi {@extend .round-std-r}
+  
+  @include not-disabled {
+    @include if-not-current {
+      @include hover {@extend .fg-accent}
+    }
+    
+    @include if-not-checked {
+      @include hover {@extend .fg-accent}
+    }
+  }
+  
+  @include if-current {
+    @extend .radio-button-active;
+  }
+  
+  @include if-checked {
+    @extend .radio-button-active;
+  }
+  
+  @include disabled {
+    @extend .cur-not;
+    @extend .fg-pale;
+    
+    @include if-current {
+      @extend .bg-accent-light;
+      @extend .fg-primary;
+    }
+    
+    @include if-checked {
+      @extend .bg-accent-light;
+      @extend .fg-primary;
+    }
+  }
+  
+  &.--orange {
+    @include not-last-chi {@extend .border-accent-1, .border-r-none}
+    @include last-chi {@extend .border-accent-1}
+  }
+  
+  &.--big {
+    @extend .h-2x5;
+    @include not-first-chi {@extend .flex-1}
+  }
+}
+.radio-button-active {
+  @extend .bg-accent;
+  color: var(--col-def-white) !important;
+  
+  &:last-child, & + * {
+    @include before {@extend .bg-accent}
+  }
+}
+.radio-button-round {
+  @extend .row-cen-cen;
+  @extend .bg-white;
+  @extend .border-faded-1;
+  @extend .round-to-content;
+  @extend .fg-primary;
+  @extend .btn-svg-icon;
+  @extend .trans-cap;
+  @extend .pad-v-0x5;
+  @extend .pad-h-1;
+  @extend .gap-h-xs;
+  @extend .anim;
+  
+  svg {
+    @extend .fg-pale;
+    @extend .font-medium;
+    @extend .anim;
+  }
+  
+  @include not-disabled {
+    @include if-not-current {
+      @include hover {
+        @extend .border-primary-1;
+        
+        svg {
+          @extend .fg-primary;
+        }
+      }
+    }
+    
+    @include if-not-checked {
+      @include hover {
+        @extend .border-primary-1;
+        
+        svg {
+          @extend .fg-primary;
+        }
+      }
+    }
+  }
+  
+  @include if-current {
+    @extend .radio-button-round-active;
+  }
+  
+  @include if-checked {
+    @extend .radio-button-round-active;
+  }
+  
+  @include disabled {
+    @extend .radio-button-round-disabled;
+  }
+}
+.radio-button-round-active {
+  @extend .bg-accent, .cur-def;
+  border: solid 1px var(--col-accent) !important;
+  color: var(--col-def-white) !important;
+  
+  svg {color: var(--col-def-white) !important}
+}
+.radio-button-round-disabled {
+  @extend .cur-not;
+  @extend .fg-pale;
+  
+  @include if-current {
+    @extend .bg-accent-light;
+    @extend .fg-primary;
+  }
+  
+  @include if-checked {
+    @extend .bg-accent-light;
+    @extend .fg-primary;
+  }
+}
+.radio-button-round-active-categories-mode  {
+  @extend .bg-accent;
+}
+
+.radio-buttons-vertical-round {@extend .col-sta-sta, .gap-v-xs}
+
+// TODO: Rework it!
+:not(.--categories-mode) {
+  .radio-buttons {
+    &.--horizontal {
+      @extend .row-sta-str;
+      
+      &:not(.--round) {@extend .border-pale-1, .round-std}
+      
+      &.--round {
+        @extend .mar-t--0x5;
+        .radio-button-round {@extend .mar-t-0x5}
+      }
+  
+      .radio-button {margin-left: 0 !important}
+    }
+    
+    &.--vertical {@extend .col-sta-str, .gap-v-xs}
+    
+    &.--radio-selectable {
+      @extend .maw-col-6;
+      
+      > * {@extend .flex-1}
+    }
+    
+    &.--radio-selectable-duration {
+      @extend .sm-w-full;
+      
+      @include media-sm {> * {flex: 1}}
+    }
+    
+    &.--round {
+      @extend .row-sta-str;
+      
+      &:not(.--vertical) {@extend .gap-h-xs}
+    }
+  }
+}
+.--categories-mode {
+  .radio-buttons {
+    &.--round {@extend .row-sta-str, .flex-wrap, .mar-t--0x5, .--no-gap-h}
+  }
+  
+  .radio-button-round {
+    @extend .bg-faded, .border-faded-1, .fg-primary, .mar-t-0x5, .mar-r-0x5;
+    
+    @include if-current {@extend .radio-button-round-active-categories-mode}
+    @include if-checked {@extend .radio-button-round-active-categories-mode}
+  }
+}
+// TODO: END Rework it!
+
+// Form Choice --> Checkbox | Radio Button
+.form-choice {
+  @extend .col-sta-sta, .w-full;
+  
+  input {
+    @include checked {
+      & + .form-choice-label {
+        .form-choice-icon {
+          @extend .border-accent-2;
+          @include before {@extend .full-sz}
+          @include after {
+            @include w(0.365);
+            @include h(0.75);
+          }
+        }
+  
+        &.--ternary {
+          .form-choice-icon {@include before {width: 50%;height: 50%}}
+        }
+      }
+    }
+    
+    @include disabled {
+      & + .form-choice-label {@extend %disabled}
+    }
+    
+    @include not-disabled {
+      & + .form-choice-label {
+        @include hover {
+          .form-choice-icon {@extend .border-accent-2}
+          .form-choice-text {@extend .fg-accent}
+        }
+      }
+    }
+  }
+  
+  &.--radio {
+    .form-choice-icon {
+      @extend .circle;
+      @include before {@extend .circle}
+      @include after {@extend .hidden}
+    }
+  }
+}
+.form-choice-label {@extend .row-sta-str, .cur-point, .gap-h-xs}
+.form-choice-icon {
+  @extend .col-cen-cen, .bg-white, .border-pale-2, .round-std, .relative, .sqr-1x25, .anim;
+  
+  @include before {@extend .bg-accent, .round-std-half}
+  @include after {
+    @extend .absolute, .full-sz-0;
+    border-bottom: 0.125rem solid var(--col-def-white);
+    border-right: 0.125rem solid var(--col-def-white);
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%) rotate(45deg);
+    @include mar-t(-0.0625);
+  }
+}
+.form-choice-text {@extend .row-sta-cen, .form-field-typography, .text-left, .w-full, .anim}
+
+// Don't want to break geometry
+// Global classes for the stylization of elements
+.--big-inputs {
+  .form-input,
+  .select-button,
+  .radio-button,
+  .btn {
+    &:not(.--not-big):not(.--tiny) {
+      height: 2.75rem !important;
+      @include media-xl {height: 2.5rem !important}
+      @include media-md {height: 2.25rem !important}
+    }
+  }
+}
+
+.--big-labels {
+  .form-label {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    > * {
+      @include first-chi {@extend .font-h3, .wei-bold}
+      
+    }
+  }
+}
+
+.--full-w-radio-buttons {
+  @extend .col-sta-sta;
+  
+  .radio-buttons-vertical-round,
+  .radio-buttons {
+    @extend .w-full;
+    & > * {@extend .w-full}
+  }
+}
+
+.toggle-choice {
+  input {
+    @include checked {
+      & + .toggle-label {@extend .fg-accent, .font-std, .anim}
+      & + .toggle-label .toggle-bullet-body {@extend .bg-accent, .row-end-cen}
+      & + .toggle-label .toggle-bullet {@extend .border-accent-1}
+      & + .toggle-label .toggle-label-text-on {@extend .inline-block}
+      & + .toggle-label .toggle-label-text-off {@extend .hidden}
+    }
+  }
+
+  .toggle-label {@extend .row-sta-cen, .w-full, .gap-h-xs, .hover-fg-accent, .ls-gap-h-0x25, .cur-point}
+  .toggle-label-text {@extend .font-std, .ls-font-small, .anim}
+  .toggle-label-text-on {@extend .hidden}
+  .toggle-label-text-off {@extend .inline-block}
+  .toggle-bullet-body {@extend .row-sta-cen, .bg-pale, .round-to-content, .w-2x5, .h-1x25, .ls-w-1x5, .ls-h-1}
+  .toggle-bullet {@extend .border-pale-1, .bg-white, .sqr-1x25, .circle, .ls-sqr-1}
+}
+
+.form-title-base {
+  @extend .wei-bolder;
+}
+
+.form-title {
+  @extend .form-title-base, .font-large;
+}
+
+.form-desc {
+  @extend .form-title-base, .font-std, .fg-warm-gray;
+}
+
+.form-add {
+  @extend .form-title-base, .font-std;
+}

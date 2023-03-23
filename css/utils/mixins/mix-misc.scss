@@ -1,0 +1,23 @@
+// Aspect ratio 16:9
+@mixin aspect-ration-16x9 {padding-bottom: 56.25%}
+
+// Svg
+/*
+Example input: .blah {@include self-svg {fill: white}}
+Example output: svg.blah, .blah svg {fill: white}
+*/
+@mixin self-svg {
+  svg#{&}, svg {@content}
+}
+
+// Misc
+@mixin reflection-v {transform: scale(1, -1)}
+
+// Gradients for elements
+@mixin gradient($gradient) {
+  @extend .relative;
+  @include before {
+    background: linear-gradient(#{$gradient});
+    @extend .abs-fit;
+  }
+}

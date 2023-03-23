@@ -17,6 +17,7 @@ server-side rendering.
 export const ren = p.Ren.from(dg.glob)
 export const E = ren.E
 export const S = ren.S
+export const Raw = p.Raw
 
 class PropBui extends p.PropBui {
   // Must be called AFTER `.href` or `.link`.

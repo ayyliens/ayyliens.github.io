@@ -1,0 +1,1655 @@
+html {
+  // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior
+  scroll-behavior: smooth;
+}
+
+// Focus
+$focus-width: var(--focus-width);
+// $color-focus: hsla(16, 92%, 86%, 0.75); // This color is confusing because too close to error.
+// $color-focus: hsla(217, 99%, 65%, 0.5); // Chrome Default.
+$color-focus: var(--col-accent);
+// Note: this uses an outline because box-shadow and border don't support an
+// offset. Outlines don't support rounding, so this can't be used for circular
+// elements such as radio inputs.
+%focus {
+  outline-width: $focus-width;
+  outline-color: $color-focus;
+  outline-style: solid;
+  outline-offset: 0;
+  animation-name: keyframes-collapse-outline;
+}
+
+@keyframes keyframes-collapse-outline {
+  from {outline-offset: $focus-width}
+}
+
+// For circular elements
+%focus-round {box-shadow: inset 0 0 $focus-width $color-focus}
+
+.enable-focus-indicators {
+  :focus:not(%nofocus) {@extend %focus}
+
+  // Experimental
+  @include focus {@extend .z-index-0}
+}
+
+select:focus,
+input[type=radio]:focus,
+input[type=checkbox]:focus {
+  &, .enable-focus-indicators & {outline: $color-focus auto}
+}
+
+%disabled {@extend .opacity-0x5}
+
+.body-lock {
+  @extend .over-y-hidden;
+  @extend .w-full;
+  @extend .abs-t-l;
+}
+
+// Strike text
+.strike-text {
+  @include before-after {
+    @extend .bg-pale;
+
+    width: 10000%;
+    height: 2px;
+
+    @extend .abs-center-y;
+  }
+
+  @include before {
+    right: calc(100% + 8px);
+  }
+
+  @include after {
+    left: calc(100% + 8px);
+  }
+}
+
+// Items Horizontal Scroll Core
+@mixin last-child-w($val: 1) {
+  max-width: $val * 1rem;
+  min-width: $val * 1rem;
+  width: $val * 1rem;
+}
+
+.items-horizontal-scroll {@extend .row-sta-str, .over-x-auto, .maw-full}
+
+// Image
+.image-preview {opacity: 0}
+.image-preview-show {
+  animation-name: keyframes-fade-in;
+  animation-duration: $anim-duration-fast;
+  animation-timing-function: ease-in;
+  // Retain the last styles applied by the animation.
+  animation-fill-mode: forwards;
+}
+
+@keyframes keyframes-fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+.image-box {
+  @extend .bg-pale, .bg-pos-top-center, .bg-no-repeat, .bg-size-cover, .w-full, .anim;
+
+  &.--biggest {@extend .h-18}
+  &.--big     {@extend .h-15}
+
+  &.--standard,
+  &.--small {
+    @extend .h-11;
+    @include media-lg {@include h(11.5)}
+    @include media-ls {@include h(9.5)}
+  }
+  
+  &.--extra-small {@extend .h-6x5}
+}
+
+// Triangles CSS
+$triangle-size-w: 2.25rem;
+$triangle-size-h: 1.25rem;
+
+.--triangles-t-core {
+  @include before-after {
+    border-style: solid;
+    border-color: transparent;
+    @extend .full-sz-0;
+  }
+  
+  @include before {
+    border-width: $triangle-size-h $triangle-size-w 0 0;
+    border-top-color: var(--col-accent);
+  }
+  
+  @include after {
+    border-width: 0 $triangle-size-w $triangle-size-h 0;
+    border-right-color: var(--col-accent);
+  }
+}
+
+.--triangles-t {@extend .--triangles-t-core}
+
+.--triangles-t-sm {
+  @extend .--triangles-t-core;
+  
+  @include before-after {
+    @extend .absolute;
+    @extend .z-index-backward;
+    top: 80%;
+  }
+  
+  @include before {
+    @extend .abs-l;
+    @include media-ls {border-width: 0.75rem 1.5rem 0 0}
+  }
+  
+  @include after {
+    @extend .abs-r;
+    @include media-ls {border-width: 0 1.5rem 0.75rem 0}
+  }
+}
+
+// Tabs
+.tabs-default {
+  .tabs-header {
+    @extend .row-sta-str;
+    @extend .border-faded-b-2;
+    @extend .w-full;
+    @extend .gap-h-6;
+    @extend .lg-gap-h-4;
+    @extend .ls-hidden;
+    @extend .ls-gap-h-none;
+
+    @include media-ls {
+      background-color: var(--col-def-white);
+      border: 1px solid var(--col-primary);
+      border-radius: var(--radius-std);
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      left: 0;
+    }
+  }
+
+  .tab {
+    @extend .row-sta-cen;
+    @extend .font-large;
+    @extend .wei-bold;
+    @extend .pad-b-1;
+    @extend .hover-fg-accent;
+
+    @include before {
+      @extend .bg-accent;
+      @extend .opacity-0;
+      @extend .abs-b-l;
+      @extend .w-full;
+      height: 2px;
+      margin-bottom: -2px;
+      @extend .anim;
+    }
+
+    @include if-current {
+      @extend .fg-accent;
+      @extend .cur-def;
+
+      @include before {
+        @extend .opacity-1;
+      }
+    }
+
+    @include media-ls {
+      font-size: 14px;
+      font-weight: 400;
+      width: 100%;
+      padding: 1rem 1.5rem;
+
+      @include before {@include d-none}
+
+      @include hover {
+        background-color: var(--col-faded);
+        color: var(--col-primary);
+      }
+
+      @include if-current {
+        background-color: var(--col-faded);
+        color: var(--col-accent);
+      }
+    }
+  }
+}
+.tabs-round {
+  .tabs-header {
+    @extend .row-sta-cen;
+    @extend .bg-faded;
+    @extend .round-std-x2;
+    @extend .over-x-auto;
+    @extend .w-full;
+    @extend .pad-0x25;
+    @extend .gap-r-h-0x25;
+  }
+
+  .tab {
+    @extend .row-cen-cen;
+    @extend .fg-black;
+    @extend .border-transparent-1;
+    @extend .round-std;
+    @extend .font-h3;
+    @extend .wei-bold;
+    @extend .flex-1;
+    @extend .miw-col-1x5;
+    @extend .h-2x5;
+    @extend .pad-0x25;
+    @extend .gap-h-xs;
+
+    @include if-current {
+      @extend .bg-white;
+      @extend .border-pale-1;
+      @extend .shad-sub-std;
+    }
+
+    @include hover {
+      @include if-not-current {
+        @extend .bg-white;
+        @extend .fg-accent;
+      }
+    }
+  }
+}
+.tabs-buttons {
+  .tabs-header {
+    @extend .row-cen-str;
+    @extend .border-accent-1;
+    @extend .round-std;
+    @extend .cen-by-mar;
+  }
+
+  .tab {
+    @extend .row-cen-cen;
+    @extend .fg-black;
+    @extend .font-std;
+    @extend .trans-upper;
+    @extend .h-2x5;
+    @extend .pad-v-0x25;
+    @extend .pad-h-2;
+    @extend .md-pad-h-1;
+
+    @include before {
+      @extend .bg-accent;
+      @extend .abs-t-l;
+      width: 1px;
+      @extend .h-full;
+    }
+  
+    @include first-chi {
+      @extend .round-std-l;
+
+      @include before {@extend .hidden}
+    }
+  
+    @include last-chi {@extend .round-std-r}
+
+    @include if-current {
+      @extend .bg-accent, .fg-white;
+    }
+
+    @include hover {
+      @include if-not-current {
+        @extend .bg-accent-light;
+      }
+    }
+  }
+}
+
+// Header
+.burger {
+  @extend .hidden;
+  @extend .w-1x5;
+  @include gap-v(0.25);
+  @extend .lg-show;
+
+  @include hover {> * {@extend .bg-accent}}
+
+  > * {@extend .block, .bg-black, .w-full, .anim; @include h(0.125)}
+}
+
+// New Caro
+.caro {
+  @extend .over-hidden;
+  @extend .relative;
+  @extend .w-full;
+  @extend .anim;
+}
+.caro-radio-input {
+  @extend .invis;
+
+  &[id*='caro-id-']:first-child:checked   ~ .caro-dots .caro-dot:first-child,
+  &[id*='caro-id-']:nth-child(3):checked  ~ .caro-dots .caro-dot:nth-child(2),
+  &[id*='caro-id-']:nth-child(5):checked  ~ .caro-dots .caro-dot:nth-child(3),
+  &[id*='caro-id-']:nth-child(7):checked  ~ .caro-dots .caro-dot:nth-child(4),
+  &[id*='caro-id-']:nth-child(9):checked  ~ .caro-dots .caro-dot:nth-child(5),
+  &[id*='caro-id-']:nth-child(11):checked ~ .caro-dots .caro-dot:nth-child(6),
+  &[id*='caro-id-']:nth-child(13):checked ~ .caro-dots .caro-dot:nth-child(7),
+  &[id*='caro-id-']:nth-child(15):checked ~ .caro-dots .caro-dot:nth-child(8),
+  &[id*='caro-id-']:nth-child(17):checked ~ .caro-dots .caro-dot:nth-child(9),
+  &[id*='caro-id-']:nth-child(19):checked ~ .caro-dots .caro-dot:nth-child(10) {
+    @extend .bg-accent;
+    @extend .cur-not;
+  }
+
+  &[id*='caro-id-']:checked + .caro-item {
+    @extend .opacity-1;
+    @extend .vis-visible;
+    @extend .relative;
+    @extend .z-index-1;
+  }
+}
+.caro-item {
+  @extend .opacity-0;
+  @extend .vis-hidden;
+  @extend .abs-t-l;
+  @extend .z-index-backward;
+  @extend .w-full;
+  @extend .anim;
+
+  &.--with-dots   {@extend .pad-b-2}
+  &.--with-arrows {@extend .mih-2, .pad-r-7, .lg-pad-r-0}
+}
+.caro-arrow {
+  @extend .col-cen-cen;
+  @extend .bg-white;
+  @extend .fg-black;
+  @extend .border-pale-1;
+  @extend .round-std;
+  @extend .cur-point;
+  @extend .opacity-1;
+  @extend .btn-svg-icon;
+  @extend .abs-b-r;
+  @extend .sqr-2;
+  @extend .anim;
+
+  @include not-disabled {
+    @include hover {
+      @extend .border-primary-1;
+    }
+  }
+
+  @include disabled {
+    @extend .fg-pale;
+    @extend .cur-not;
+  }
+
+  &.--prev {
+    @extend .mar-r-2x5;
+    @extend .lg-mar-r-0;
+
+    @include media-lg {
+      right: auto;
+      left: 0;
+    }
+  }
+
+  &.--next {}
+}
+.caro-dots {
+  @extend .row-cen-cen;
+  @extend .abs-b;
+  @extend .abs-center-x;
+  @extend .z-index-1;
+  @extend .mar-b-0x75;
+}
+.caro-dot {
+  @extend .bg-transparent;
+  @extend .border-accent-1;
+  @extend .circle;
+  @extend .cur-point;
+  @extend .sqr-0x5;
+  @extend .mar-t-0x75;
+  @extend .mar-h-0x25;
+  @extend .anim;
+
+  @include hover {
+    @extend .bg-accent-light;
+  }
+}
+
+// Pure Css Tabs
+.tab-radio-input {
+  @extend .invis;
+
+  &[id*='tab-id-']:first-child:checked  ~ .tab-content .tab-content-item:first-child,
+  &[id*='tab-id-']:nth-child(2):checked ~ .tab-content .tab-content-item:nth-child(2),
+  &[id*='tab-id-']:nth-child(3):checked ~ .tab-content .tab-content-item:nth-child(3) {
+    @extend .show;
+  }
+
+  &[id*='tab-id-']:first-child:checked  ~ .tab-list .tab-membership:first-child,
+  &[id*='tab-id-']:nth-child(2):checked ~ .tab-list .tab-membership:nth-child(2),
+  &[id*='tab-id-']:nth-child(3):checked ~ .tab-list .tab-membership:nth-child(3) {
+    @extend .border-accent-2, .cur-def;
+
+    .tab-membership-line {@extend .bg-accent}
+  }
+
+  &[id*='tab-id-']:first-child:checked  ~ .tab-list .tab-refer-friend:first-child,
+  &[id*='tab-id-']:nth-child(2):checked ~ .tab-list .tab-refer-friend:nth-child(2) {
+    @extend .btn-accent;
+  }
+}
+.tab-list             {@extend .w-full}
+.tab-content          {@extend .col-sta-cen, .w-full}
+.tab-content-item     {@extend .hidden}
+
+// Membership Tabs
+.tab-membership       {@extend .border-pale-2, .cur-point}
+.tab-membership-line  {@extend .bg-black}
+
+// Refer Tabs
+.tab-refer-friend     {@extend .round-std, .btn-with-border, .mar-h-0x25, .mar-t-0x25, .--big}
+
+// Feed Row Adaptation
+.feed-row-adaptation {
+  @extend .items-horizontal-scroll;
+  @extend .grid-4;
+  flex-wrap: nowrap !important;
+  @extend .--no-mar-t, .--no-mar-r;
+
+  > * {
+    min-width: px-to-rem(315) !important;
+    @include media-ls {min-width: px-to-rem(280) !important}
+  }
+}
+
+// Footer
+.footer-select-dropdown {
+  min-width: calc(100% + 2rem);
+
+  @include media-lg {
+    min-width: 100%;
+  }
+}
+
+// New pa(u, p, i)
+.user-nav-modal {
+  @extend .col-sta-sta, .pad-t-1;
+  width: calc(100% + 2rem);
+  @include mar-h(-1);
+}
+
+.user-nav-item-core {
+  @extend .row-sta-cen, .round-std, .btn-svg-icon, .w-full, .pad-h-1, .gap-h-xs, .anim;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  
+  &:not(.--small) {@extend .pad-v-0x75}
+  &.--small {@extend .pad-v-0x5}
+  
+  > * {@extend .anim}
+  
+  @include not-disabled {
+    @include if-not-current {@include hover {@extend .bg-faded, .fg-primary;border-color: var(--col-def-white)}}
+  }
+  
+  @include if-current {
+    @extend .bg-faded, .fg-accent, .cur-def;
+    svg {@extend .fg-accent}
+  }
+  
+  &.--deactivated {
+    @include first-chi {
+      @extend .bg-faded, .fg-accent;
+      svg {@extend .fg-accent}
+    }
+  }
+}
+
+.side-bar-menu-lg-adaptation {
+  @extend .z-index-dialog;
+  @include media-lg {
+    background-color: var(--col-def-white);
+    border: 1px solid var(--col-primary);
+    border-radius: var(--radius-std);
+    box-shadow: var(--shad-std);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+}
+
+.side-bar-menu-lg-adaptation-item {
+  @extend .user-nav-item-core, .font-norm;
+  
+  svg {@extend .font-large}
+}
+
+.my-acc-step-title-box {
+  @extend .row-sta-cen, .w-full;
+
+  .feather {@extend .btn-svg-icon, .font-big, .lg-font-large}
+  &.--small-title {.feather {@extend .font-std}}
+
+  &.--busy {
+    @extend .cur-point;
+    @include hover {@extend .fg-accent}
+  }
+}
+.my-acc-step-title {@extend .row-sta-cen, .--no-gap-h, .w-full, .gap-h-xs}
+
+.my-acc-client-invitation {
+  @extend .border-pale-t-1;
+  @extend .w-full;
+
+  &:not(.--sent) {
+    @extend .col-sta-sta;
+    @extend .pad-t-1x5;
+    @extend .gap-v-mid;
+    @extend .md-col-sta-cen;
+  }
+
+  &.--sent {
+    @extend .col-sta-cen;
+    @extend .pad-t-2;
+    @extend .gap-v-sub-std;
+  }
+}
+
+// Calendar
+.calendar-nav-item {
+  @extend .font-norm, .relative, .pad-b-1, .anim;
+
+  @include if-not-current {
+    @include hover {
+      @extend .fg-accent;
+    }
+  }
+
+  @include if-current {
+    @extend .fg-accent;
+    @extend .cur-def;
+    @extend .relative;
+
+    @include before {
+      @extend .bg-accent;
+      @extend .w-full;
+      @extend .h-1px;
+      margin-bottom: -1px;
+      @extend .abs-b-l;
+    }
+  }
+}
+
+.calendar-body {
+  @extend .col-sta-sta, .w-full;
+  
+  @include hover {@extend .relative, .z-index-high}
+}
+
+.calendar-month {
+  &.calendar-preview {
+    .calendar-day {
+      @include not-disabled {
+        .calendar-day-number {
+          @extend .bg-white;
+          @extend .fg-accent;
+          @extend .border-accent-1;
+        }
+
+        @include hover {
+          .calendar-day-number {
+            @extend .bg-accent;
+            @extend .fg-white;
+            @extend .border-accent-1;
+          }
+        }
+      }
+    }
+  }
+
+  &:not(.calendar-preview) {
+    .calendar-day {
+      @extend .pad-v-0x25;
+
+      @include not-disabled {
+        @include hover {
+          @extend .bg-faded;
+
+          .calendar-day-number {
+            @extend .bg-pale;
+          }
+        }
+      }
+    }
+  }
+}
+
+.calendar-days {@extend .row-sta-str, .w-full, .grid-7, .--no-mar-r}
+
+.calendar-day {
+  @include not-disabled {
+    .calendar-day-number {
+      @include active {
+        background-color: var(--col-accent) !important;
+        border-color: var(--col-accent) !important;
+        color: var(--col-def-white) !important;
+      }
+    }
+  }
+}
+
+.calendar-day-item {
+  @extend .row-sta-str, .w-full, .mih-2;
+  padding: 1px 0 1px 2.5rem;
+}
+
+.calendar-arrow {
+  @extend .col-cen-cen;
+  @extend .border-pale-1;
+  @extend .round-std;
+  @extend .font-small;
+  @extend .btn-svg-icon;
+  @extend .sqr-2;
+  @extend .anim;
+
+  @include not-disabled {
+    @include hover {
+      @extend .border-primary-1;
+    }
+  }
+
+  @include disabled {
+    @extend .opacity-0x35;
+  }
+}
+
+.calendar-availability {
+  @extend .col-sta-sta;
+  @extend .font-norm;
+  @extend .relative;
+  @extend .hidden-show;
+
+  @include media-sm {
+    order: 1;
+  }
+}
+
+.calendar-availability-title {
+  @extend .row-sta-cen;
+  @extend .fg-accent;
+  @extend .cur-point;
+  @extend .gap-h-xs;
+  svg {
+    @extend .font-small;
+    @extend .btn-svg-icon;
+    @extend .reflection-v;
+  }
+}
+
+.calendar-availability-dropdown {
+  @extend .col-sta-sta;
+  @extend .bg-white;
+  @extend .border-pale-1;
+  @extend .round-std;
+  @extend .miw-col-2x5;
+  @extend .w-full;
+  @extend .abs-t-100p;
+  @extend .abs-r;
+  @extend .z-index-0;
+  @extend .hidden;
+
+  @include media-md {
+    max-width: columnWidthFunction(2) !important;
+    min-width: columnWidthFunction(2) !important;
+  }
+
+  @include media-sm {
+    right: auto;
+    left: 0;
+  }
+}
+
+.calendar-availability-button {
+  @extend .row-sta-cen;
+  @extend .flex-1;
+  @extend .relative;
+  @extend .pad-v-0x75;
+  @extend .pad-r-1;
+  @extend .pad-l-2;
+  @extend .busy-bg-light-fg-dark;
+
+  @include before {
+    @extend .circle;
+    @extend .sqr-0x75;
+    @extend .abs-center-y;
+    @extend .abs-l;
+    @extend .z-index-0;
+    @extend .mar-l-0x75;
+  }
+
+  &:nth-child(4n+1) {
+    @include before {
+      @extend .bg-accent;
+    }
+  }
+
+  &:nth-child(4n+2) {
+    @include before {
+      @extend .bg-accent;
+    }
+  }
+
+  &:nth-child(4n+3) {
+    @include before {
+      @extend .bg-success;
+    }
+  }
+
+  &:nth-child(4n+4) {
+    @include before {
+      @extend .bg-error;
+    }
+  }
+}
+
+$line-size: calc(100% + 2px);
+
+.calendar-month-items {
+  @extend .border-pale-b-1, .grid-core, .grid-7;
+  @extend .--no-gap-h, .--no-mar-r, .--no-mar-t;
+}
+
+.calendar-month-item {
+  @extend .border-pale-t-1;
+  @extend .border-pale-l-1;
+  @extend .relative;
+  height: 8.5rem;
+  @extend .pad-t-1x5;
+  @extend .pad-h-0x5;
+  @extend .pad-b-1;
+
+  &:nth-child(7n) {
+    @extend .border-pale-r-1;
+  }
+
+  &.--busy {
+    @extend .cur-point;
+
+    @include hover {
+      @extend .border-accent-t-1;
+      @extend .border-accent-l-1;
+
+      @extend .z-index-2;
+
+      @include before-after {
+        @extend .bg-accent;
+        @extend .absolute;
+      }
+
+      @include before {
+        width: 1px;
+        height: $line-size;
+        top: -1px;
+        right: -1px;
+      }
+
+      @include after {
+        width: $line-size;
+        @extend .h-1px;
+        bottom: -1px;
+        left: -1px;
+      }
+    }
+
+    &.--active {
+      @extend .border-accent-t-1;
+      @extend .border-accent-l-1;
+      @extend .z-index-1;
+
+      @include before-after {
+        @extend .bg-accent;
+        @extend .absolute;
+        @extend .z-index-0;
+      }
+
+      @include before {
+        width: 1px;
+        height: $line-size;
+        top: -1px;
+        right: -1px;
+      }
+
+      @include after {
+        width: $line-size;
+        @extend .h-1px;
+        bottom: -1px;
+        left: -1px;
+      }
+    }
+
+    @include disabled {
+      @extend .cur-not;
+    }
+  }
+}
+
+.calendar-month-item-arrow {
+  border-style: solid;
+  border-color: transparent;
+  @extend .full-sz-0;
+  @extend .abs-center-y;
+  @extend .z-index-2;
+
+  &.--prev {
+    border-width: .5rem .75rem .5rem 0;
+    border-right-color: var(--col-accent);
+    @extend .abs-l;
+    @extend .mar-l--1;
+
+    @include not-disabled {
+      @include hover {
+        border-right-color: var(--col-accent-light);
+      }
+    }
+  }
+
+  &.--next {
+    border-width: .5rem 0 .5rem .75rem;
+    border-left-color: var(--col-accent);
+    @extend .abs-r;
+    @extend .mar-r--1;
+
+    @include not-disabled {
+      @include hover {
+        border-left-color: var(--col-accent-light);
+      }
+    }
+  }
+}
+
+.calendar-advanced-item {
+  @extend .w-full;
+
+  @include not-first-chi-not-only {
+    .calendar-advanced-item-inner {@extend .pad-v-1x5}
+  }
+  
+  @include first-chi {
+    .calendar-advanced-item-inner {@extend .pad-b-1x5}
+  }
+}
+
+.calendar-advanced-item-inner {@extend .w-full, .gap-v-sm}
+
+.calendar-schedule-year-day-items {
+  @extend .row-cen-cen;
+  @extend .flex-wrap;
+  @extend .over-hidden;
+  @extend .w-full;
+  @include h(0.25);
+
+  > * {@include mar-h(0.125)}
+}
+
+// Reactions
+.reactions {
+  &.--left    {@extend .row-sta-str}
+  &.--center  {@extend .row-cen-str}
+  @extend .--no-gap-h, .gap-h-xs;
+}
+
+.reaction-button {
+  @extend .row-cen-cen;
+  @extend .bg-transparent;
+  @extend .fg-primary;
+  @extend .font-norm;
+  @extend .btn-svg-icon;
+  @extend .gap-h-xs;
+  @extend .anim;
+
+  &:not(.--simple-view-button) {
+    @extend .round-std;
+    @extend .border-pale-1;
+
+    @extend .pad-0x5;
+
+    @include hover {
+      @extend .border-accent-1;
+    }
+
+    &.--active {
+      @extend .fg-white;
+      @extend .bg-accent;
+      @extend .border-accent-1;
+    }
+  }
+
+  &.--simple-view-button {
+    @include hover {
+      @extend .fg-accent;
+    }
+
+    &.--active {
+      @extend .fg-accent;
+    }
+  }
+}
+
+// Amazon Banners fix
+.disabled-invisible {
+  @include disabled {
+    visibility: hidden;
+  }
+}
+
+// Share
+.share-item {
+  &.--facebook {
+    @include hover {
+      border-color: var(--col-facebook);
+      background-color: var(--col-facebook);
+    }
+  }
+
+  &.--twitter {
+    @include hover {
+      border-color: var(--col-twitter);
+      background-color: var(--col-twitter);
+    }
+  }
+
+  &.--linkedin {
+    @include hover {
+      border-color: var(--col-linkedin);
+      background-color: var(--col-linkedin);
+    }
+  }
+
+  &.--reddit {
+    @include hover {
+      border-color: var(--col-reddit);
+      background-color: var(--col-reddit);
+    }
+  }
+
+  &.--flipboard {
+    @include hover {
+      border-color: var(--col-flipboard);
+      background-color: var(--col-flipboard);
+    }
+  }
+
+  &.--clipboard {
+    @include hover {
+      border-color: var(--col-warm-gray);
+      background-color: var(--col-warm-gray);
+    }
+  }
+}
+
+.share-tooltip {
+  @extend .bg-white, .border-pale-1, .round-std, .abs-b-100p, .z-index-1, .mar-b-0x5, .pad-1,
+          .--no-gap-h, .lg-col-sta-cen;
+  
+  > * {
+    @include mar-v(0.25);
+    @include mar-h(0.5)
+  }
+
+  @include before {
+    @extend .bg-white, .border-pale-b-1, .border-pale-l-1, .sqr-0x5, .abs-b, .z-index-1;
+    margin: 0 0 -0.5rem -.25rem;
+  }
+
+  &:not(.--right-side):not(.--left-side) {
+    @extend .abs-center-x;
+    @include before {@extend .abs-center-x, .rotate--45-org-lft}
+  }
+
+  &.--right-side {
+    @extend .abs-r;
+    @include before {@extend .abs-r, .mar-r-1, .rotate--45-org-lft}
+  }
+
+  &.--left-side {
+    @extend .abs-l;
+    @include before {@extend .abs-l, .mar-l-1, .rotate--45-org-lft}
+  }
+  
+  @include media-lg {@include pad(0.5)}
+}
+
+// Service Page
+.ls-image-w-viewport {
+  @include media-ls {
+    border-radius: 0 !important;
+    width: calc(100% + 2rem) !important;
+    margin: 0 -1rem !important;
+  }
+}
+
+// Class for automatically generated form from the backend
+.automatically-generated-form {
+  @extend .col-sta-sta, .w-full, .gap-v-mid, .--big-labels;
+
+  .rating-item,
+  .rating-title {@extend .maw-col-12}
+
+  .rating-item {@extend .col-sta-sta, .gap-h-none}
+
+  .form-textarea {@extend .--standard}
+}
+
+// Rating
+.rating-title {
+  @extend .row-sta-cen;
+  @extend .font-large;
+  @extend .wei-bold;
+  @extend .maw-col-2;
+  @extend .miw-col-2;
+  @extend .mar-t-0x25;
+  @extend .gap-r-h-0x25;
+  @extend .md-mar-0;
+  @extend .ls-miw-col-1x5;
+}
+
+.star-rating-and-value {
+  @extend .row-bet-cen;
+  @extend .gap-h-lg;
+  @extend .ls-gap-h-none;
+}
+
+.star-rating {
+  @extend .row-sta-cen;
+  @extend .relative;
+  @extend .gap-h-xs;
+  @extend .ls-gap-h-0x25;
+}
+
+.star-rating-box {
+  @extend .relative;
+
+  &.--hover {
+    @include not-disabled {
+      @extend .cur-point;
+    }
+
+    @include disabled {
+      @extend .cur-def;
+    }
+
+    .star-rating-filled {
+      @extend .abs-t-l;
+      @extend .z-index-1;
+    }
+  }
+}
+
+.star-rating-empty {
+  background-image: url(/images/svg/icons/star-empty.svg);
+  background-position: 0;
+  @extend .bg-no-repeat;
+  background-size: 24px;
+  @extend .relative;
+  @extend .sqr-1x5;
+
+  @include media-ls {
+    background-size: 20px;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+.star-rating-filled {
+  background-image: url(/images/svg/icons/star-filled-accent.svg);
+  background-position: 0;
+  @extend .bg-no-repeat;
+  background-size: 24px;
+
+  &:not(.--full-width) {
+    @extend .h-1x5;
+    @extend .abs-t-l;
+    @extend .z-index-1;
+    @include media-ls {
+      height: 1.25rem;
+    }
+  }
+
+  &.--full-width {
+    @extend .sqr-1x5;
+
+    @include media-ls {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+
+  @include media-ls {
+    background-size: 20px;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+.rating-form-title {
+  @extend .fg-primary;
+  @extend .font-medium;
+}
+
+// Live Stream
+.live-stream-chat-list-item {
+  @include last-chi {@extend .pad-b-1}
+}
+
+.live-stream-chat-body {
+  @extend .bg-faded;
+  @extend .round-std-b;
+  @extend .w-full;
+
+  &:not(.--not-auth) {
+    @extend .pad-v-0x5;
+    @extend .pad-h-1;
+  }
+
+  &.--not-auth {
+    @extend .pad-1;
+  }
+}
+
+.live-stream-reactions {
+  @extend .ls-gap-h-std;
+
+  &:not(.--owner) {
+    @extend .ls-row-bet-cen;
+    @extend .ls-w-full;
+
+    @include media-sm {
+      flex-wrap: wrap;
+
+      .reactions {
+        @include w-full;
+        @include mar-t(1);
+      }
+    }
+
+    @extend .sm-gap-h-none;
+  }
+}
+
+// Reviews
+.rating-item {
+  @extend .row-sta-sta;
+  @extend .relative;
+  @extend .maw-col-4;
+  @extend .gap-h-lg;
+  @extend .anim;
+  @extend .xl-row-bet-sta;
+  @extend .xl-maw-col-12;
+  @extend .xl-gap-h-std;
+  @extend .ls-gap-h-xs;
+}
+
+.review-form-layout {
+  @extend .w-full;
+  @extend .gap-v-mid;
+
+  &:not(.--modal) {
+    @extend .border-pale-t-1;
+
+    @extend .pad-t-1x5;
+  }
+
+  &.--modal {
+    .rating-item {
+      @extend .maw-col-12;
+    }
+  }
+
+  @include media-sm {
+    .rating-title {
+      min-width: auto;
+      max-width: none;
+    }
+  }
+}
+
+// Static Pages
+.static-page-item {
+  @extend .bg-faded-nth-child-odd;
+  @include last-chi {&:not(:nth-child(odd)) {@extend .pad-b-0}}
+}
+
+// Categories
+.--categories-center {
+  @extend .row-cen-cen;
+  
+  .category-item {@extend .mar-h-0x25}
+}
+
+.category-item {
+  @extend .row-cen-cen, .bg-faded, .fg-primary, .round-to-content, .text-center,
+          .trans-cap, .mih-1, .mar-t-0x5, .pad-v-0x25, .anim;
+
+  &.--small     {@extend .font-small, .pad-h-0x5, .ls-font-tiny}
+  &.--standard  {@extend .font-std, .pad-h-1}
+}
+
+// Visit Card
+.visit-card-nav-item {
+  > svg {@extend .font-large, .anim}
+  
+  @include not-first-chi {border-left: 0}
+  @include first-chi {@extend .round-std-l}
+  @include last-chi {@extend .round-std-r}
+
+  @include hover {> svg {@extend .fg-accent}}
+}
+
+.showcase-image {
+  @include media-sm {
+    border-radius: 0 !important;
+    width: calc(100% + 2rem);
+    margin: 0 -1rem;
+  }
+}
+
+.visit-card-hr {
+  @include media-md {
+    width: calc(100% + 2rem);
+    margin: 0 -1rem;
+  }
+}
+
+// Text / Wisdom tree
+@function calcSize($val) {
+  @return $val * 2.4rem;
+}
+@mixin circleSize($val) {
+  flex: 0 0 calcSize($val);
+  width: calcSize($val);
+  height: calcSize($val);
+}
+.wisdom-tree-lp {@include circleSize(7.5)}
+.wisdom-tree-circle {
+  @include first-chi {@include circleSize(13.5)}
+  &:nth-child(2) {@include circleSize(19.5)}
+  &:nth-child(3) {@include circleSize(25.5)}
+  &:nth-child(4) {@include circleSize(31.5)}
+  &:nth-child(5) {@include circleSize(37.5)}
+  &:nth-child(6) {@include circleSize(43.5)}
+  &:last-of-type {@include circleSize(49.5)}
+  
+  @include media-xl {
+    @include first-chi {@include circleSize(6.5)}
+    &:nth-child(2) {@include circleSize(11.5)}
+    &:nth-child(3) {@include circleSize(16.5)}
+    &:nth-child(4) {@include circleSize(21.5)}
+    &:nth-child(5) {@include circleSize(26.5)}
+    &:nth-child(6) {@include circleSize(31.5)}
+    &:last-of-type {@include circleSize(36.5)}
+  }
+}
+
+.text-tree-circle {
+  @extend .wisdom-tree-circle, .border-pale-1, .circle, .abs-center, .z-index-0, .ls-hidden;
+}
+
+.text-tree-level-1 {
+  @extend .gap-v-xl;
+  & > .text-tree-heading {
+    @extend .font-big;
+    @extend .wei-black;
+    @extend .trans-cap;
+  }
+  & > .text-tree-list {
+    @extend .mar-b--3x25;
+  }
+}
+
+.text-tree-level-2 {
+  @extend .pad-b-3x25;
+  @extend .gap-v-xs;
+  & > .text-tree-heading {
+    @extend .fg-graphite;
+    @extend .font-large;
+    @extend .wei-bold;
+  }
+}
+
+.text-tree-level-3 {
+  @extend .pad-t-0x5;
+  & > .text-tree-heading {
+    @extend .fg-graphite;
+    @extend .font-large;
+  }
+  & > .text-tree-list {
+    @extend .pad-l-0x5;
+  }
+}
+
+.text-tree-level-4 {
+  @extend .pad-t-0x5;
+  & > .text-tree-heading {
+    @extend .fg-primary;
+    @extend .font-large;
+  }
+  & > .text-tree-list {
+    @extend .pad-l-0x5;
+  }
+}
+
+.text-tree-level-5 {
+  @extend .pad-t-0x25;
+  & > .text-tree-heading {
+    @extend .fg-primary;
+    @extend .font-medium;
+  }
+}
+
+// Filter
+.filter {
+  .filter-body > * {
+    &:first-child,
+    &:nth-child(2) {
+      .select-list {
+        left: 0;
+        right: auto;
+      }
+    }
+    &:nth-child(4),
+    &:last-child {
+      .select-list {
+        right: 0;
+
+        @include media-md {
+          right: auto;
+          left: 0;
+        }
+      }
+    }
+  }
+
+  .form-label {@extend .ls-hidden}
+}
+
+// FAQ
+.faq-toggle-items {
+  @extend .gap-v-sm;
+
+  > * {
+    @extend .border-pale-b-1;
+    @extend .pad-b-1;
+  }
+}
+
+// Referral Program
+.referral-colored-boxes {
+  > * {
+    @extend .bg-white;
+    &:nth-child(3n+1) {@extend .border-accent-2}
+    &:nth-child(3n+2) {@extend .border-success-2}
+    &:nth-child(3n+3) {@extend .border-accent-light-2}
+  }
+}
+
+.refer-friend {
+  @extend .col-cen-sta;
+  @extend .relative;
+  @extend .maw-col-6;
+  @extend .mih-15;
+  @extend .gap-v-mid;
+  @extend .lg-maw-col-4;
+  @extend .md-maw-col-12;
+
+  @include media-sm {
+    @include mih(1);
+  }
+
+  > * {@extend .relative; @extend .z-index-1}
+
+  @include after {
+    background-image: url(/images/referral/bg-left-block.svg);
+    @extend .bg-pos-center;
+    @extend .bg-no-repeat;
+    background-size: contain;
+    @extend .abs-t;
+    @extend .z-index-0;
+    left: -15%;
+    width: 125%;
+    @extend .h-full;
+    @extend .sm-hidden;
+  }
+}
+
+.promoted-marker {
+  @extend .col-cen-cen, .bg-accent, .fg-white, .btn-svg-icon, .text-center, .wei-black;
+  @extend .abs-t-l, .sqr-2x5, .mar-l-1;
+  @include media-ls {@include sqr(1.5);@include mar-l(0.5)}
+  @extend .--triangles-t-sm;
+}
+
+details[open] .summary-closed {@include d-none}
+details:not([open]) .summary-open {@include d-none}
+
+// Allows all children to occupy the same slot. Useful for arcane tricks.
+.grid-overlap {
+  display: grid;
+  > * {grid-area: 1/1}
+}
+
+// New Main Promo Page
+.promo-page {
+  background-image: url(/images/bg/promo-page/main.jpg);
+  background-position: 50% 0;
+  @extend .bg-no-repeat;
+  @extend .bg-size-cover;
+  @include media-md {background-image: url(/images/bg/promo-page/main-768.jpg)}
+  @include media-ls {background-image: none}
+}
+
+.promo-page-content {
+  @include pad-t(6);
+  @include pad-b(10);
+  @extend .gap-v-std;
+
+  @include media-xl {
+    @include pad-t(4.5);
+    @include pad-b(3);
+  }
+
+  @include media-md {
+    @include pad-t(3);
+    @include pad-b(4);
+  }
+}
+
+.promo-page-img {
+  @extend .maw-col-8;
+  @include mar-b(-14);
+  @extend .xxl-maw-col-6;
+
+  @include media-xxl {@include mar-b(-10)}
+  @include media-xl  {@include mar-b(-6)}
+  @include media-md  {
+    @include mar-t(4);
+    @include mar-b(-10);
+  }
+  @include media-ls  {
+    @include mar-t(2.5);
+    @include mar-b(-4);
+  }
+}
+
+// Needs a better name.
+.page-main {@extend .col-sta-str, .mih-100vh, .pad-2}
+
+/*
+Fixed-position container for popups. Important: when empty, this must collapse
+to take no space on the screen. This means no own padding or margins. Children
+must be elements (not text), and must have block-like positioning (not inline).
+*/
+.notif {
+  @extend .sticky, .bot-0, .w-100vw, .col-end-cen;
+
+  > * {
+    // Override user agent default for elements such as `dialog`.
+    @extend .static;
+    @include mar-h(1);
+    @include mar-b(1);
+    
+    @include first-chi {@include mar-t(1)}
+  }
+}
+
+.toast {@extend .col-sta-sta, .gap-v-xs, .pad-1, .bg-white-0x90, .round-std, .shad-std}
+
+.msgs {@extend .col-sta-cen, .w-full, .gap-v-sm}
+
+.msg-list {
+  @extend .col-sta-str, .w-full;
+  @include media-sm {
+    width: calc(100% + 2rem) !important;
+    @include mar-h(-1);
+  }
+}
+
+.msg {
+  @extend .block, .w-full, .border-pale-1, .cur-point, .relative, .mih-2x75, .pad-1;
+  @include pad-l(4.5);
+  
+  &[data-href] {@extend .anim, .hover-bg-faded}
+  
+  & + & {border-top: none}
+  
+  @include media-sm {
+    border-right: none;
+    border-left: none;
+  }
+}
+
+.msg-author-ava {
+  @extend .bg-pale, .bg-cover, .circle, .abs-t-l, .mar-l-1, .mar-t-1;
+  @include sqr(3);
+}
+
+.msg-controls {@extend .row-sta-str, .flex-wrap, .w-full}
+
+.mark {
+  @extend .btn-icon, .ws-nowrap;
+  .marks-only-active &:not([data-count]) {@extend .hidden;}
+}
+
+/*
+Pure CSS tooltip implementation. Should be used only with very short text.
+Richer tooltips require a more complex implementation.
+
+Known issues:
+
+  * May clip outside the viewport.
+  * Incompatible with pure keyboard navigation.
+
+Works on touchscreens: tapping activates the hover state.
+*/
+[aria-label]:hover {
+  @extend .relative;
+
+  @include after(attr(aria-label)) {
+    @extend
+      .bg-black-0x9, .fg-white, .round-std-half, .ws-pre,
+      .font-std-adp, .line-normal, .absolute, .mar-b-0x5, .pad-0x25;
+
+    // Tentative. Allows to propagate bold, italic, strike-through, underline, etc.
+    text-decoration: inherit;
+  }
+
+  &[data-label-pos=rig]::after   {@extend .rig-0, .bot-100p}
+  &[data-label-pos=cen]::after   {@extend .bot-100p; @include pos-center-x}
+  &:not([data-label-pos])::after {@extend .lef-0, .bot-100p}
+}
+
+.aria-label-close:hover::after {margin-bottom: 0}
+.aria-label-sparse:hover::after {@extend .line-sparse, .pad-0x5}
+
+// Note: this doesn't fully disable interactivity.
+// Keyboard actions are still possible.
+.pointer-none {
+  @extend .cur-not;
+  pointer-events: none;
+}
+
+.flip-ver {transform: scaleY(-1)}
+
+// @TK: this is a draft; consider replacing colors with our standard colors.
+.sort-gradient {
+  --size: 0.25rem;
+
+  @extend .relative;
+  padding-left: var(--size);
+
+  @include before {
+    @extend .abs-t-l, .h-full;
+    width: var(--size);
+
+    [aria-sort=ascending] &, :not([aria-sort]) & {
+      background: linear-gradient(var(--col-accent-light), var(--col-def-error));
+    }
+
+    [aria-sort=descending] & {
+      background: linear-gradient(var(--col-def-error), var(--col-accent-light));
+    }
+  }
+}
+
+// SYNC[css_flash]
+.flash {
+  animation-name: flash;
+  animation-duration: $anim-duration-slow;
+}
+
+// SYNC[css_flash]
+@keyframes flash {
+  0% {}
+  20% {background-color: var(--col-accent-light);}
+  100% {}
+}
+
+.col-ver-lg {@extend .col-sta-cen, .w-full, .gap-v-lg}
+
+.summary {
+  @extend .row-sta-cen, .border-primary-1, .round-std, .cur-point, .h-2x75,
+          .pad-h-1, .--no-gap-h, .gap-h-xs, .anim, .lg-show-flex;
+  .feather {
+    @include first-chi {@extend .sqr-1x25}
+    @include last-chi {@extend .sqr-1}
+  }
+  
+  @include hover {
+    .feather {@include last-chi {@extend .reflection-v}}
+  }
+}
+
+.help[aria-label]:not([aria-label='']) {
+  cursor: help;
+  border-bottom: 1px dotted currentColor;
+}
+
+// Cards
+.card-marker {
+  @extend .col-cen-cen, .abs-t-l, .z-index-1, .sqr-4x5;
+  &.--negative {
+    @extend .mar-t--1, .mar-l--1;
+    .card-marker-text {
+      @include mar-t(-0.4);
+      @include mar-l(-0.4);
+    }
+  }
+  
+  img {@extend .full-sz}
+}
+.card-marker-text {
+  @extend .col-cen-cen, .fg-white, .font-std, .wei-bold, .text-center, .trans-upper,
+          .abs-fit, .z-index-1, .rotate--45;
+  letter-spacing: 1px;
+}

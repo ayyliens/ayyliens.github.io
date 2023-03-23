@@ -1,0 +1,102 @@
+// Feather SVG icons
+.feather {
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: currentColor;
+  @extend .flex-noshrink;
+  
+  width: 1em;
+  height: 1em;
+  
+  &:not(.--bdr-w-1):not(.--bdr-w-2) {stroke-width:0}
+  &.--bdr-w-1 {stroke-width:1}
+  &.--bdr-w-2 {stroke-width:2}
+}
+
+// Loading... Indicator
+.loading-indicator {
+  @extend .row-cen-cen, .bg-accent-light, .round-std, .shad-std, .mar-t-1;
+  @extend .mar-r-2x5, .pad-h-1, .pad-v-0x5, .anim;
+  animation-name: keyframes-fade-in-from-zero;
+
+  &.--fix {@extend .fix-t-r, .z-index-modal}
+}
+
+@keyframes keyframes-fade-in-from-zero {
+  0% {opacity: 0}
+  // Implicit: transition back to opacity 1
+}
+
+// Misc
+.anim, .anim::before, .anim::after {
+  transition: all $anim-duration-fast ease-in-out;
+}
+
+.soft-scroll              {-webkit-overflow-scrolling: touch}
+.rotate--45               {transform: rotate(-45deg)}
+.rotate--45-org-lft       {@extend .rotate--45;transform-origin: left}
+.reflection-v             {@include reflection-v}
+.reflection-h             {transform: scale(-1, 1)}
+.if-current-hidden        {@include if-current {@extend .hidden}}
+
+// BG
+.bg-cover                 {@extend .bg-size-cover, .bg-pos-center, .bg-no-repeat}
+.bg-contain-imp           {background-size: contain !important}
+.bg-size-cover            {background-size: cover}
+.bg-size-100p             {background-size: 100%}
+.bg-pos-top-center        {background-position: 50% 0}
+.bg-pos-center            {background-position: 50%}
+.bg-pos-right-center      {background-position: 100% 50%}
+.bg-pos-right-bottom      {background-position: 100% 100%}
+.bg-no-repeat             {background-repeat: no-repeat}
+
+// Cursors
+.cur-def                  {cursor: default}
+.cur-point                {cursor: pointer}
+.cur-not                  {cursor: not-allowed}
+
+// Opacity
+.opacity-0                {opacity: 0}
+.opacity-0x15             {opacity: 0.15}
+.opacity-0x35             {opacity: 0.35}
+.opacity-0x5              {opacity: 0.5}
+.opacity-0x75             {opacity: 0.75}
+.opacity-1                {opacity: 1}
+.hover-opacity-0x75       {@include hover {@extend .opacity-0x75}}
+
+// Visibility
+.vis-hidden               {visibility: hidden}
+.vis-visible              {visibility: visible}
+.over-hidden              {overflow: hidden}
+.over-scroll              {overflow: scroll}
+.over-x-auto              {overflow-x: auto; overflow-y: hidden}
+.over-x-scroll            {overflow-x: scroll; overflow-y: hidden}
+.over-x-hidden            {overflow-x: hidden}
+.over-y-auto              {overflow-y: auto; overflow-x: hidden}
+.over-y-scroll            {overflow-y: scroll; overflow-x: hidden}
+.over-y-hidden            {overflow-y: hidden}
+
+// Aspect ratio 16:9
+.aspect-ratio-16x9        {@include aspect-ration-16x9}
+@include media-ls {
+  .ls-aspect-ratio-16x9   {@include aspect-ration-16x9}
+}
+
+// Image in Text Background
+.image-in-text-background {
+  @extend .bg-no-repeat, .bg-pos-center;
+  background-size: cover;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  color: transparent;
+}
+
+.image-in-text-background-typography {@extend .font-extra-giant, .wei-black, .line-dense}
+
+.--referral {
+  background-image: url(/images/bg/bg-referral-text.jpg);
+  @extend .image-in-text-background-typography;
+}

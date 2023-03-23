@@ -1,0 +1,26 @@
+@mixin blk              {display: block}
+@mixin inline-block     {display: inline-block}
+@mixin d-none           {display: none}
+@mixin d-none-imp       {display: none !important}
+
+@mixin pos-center       {top: 50%;left: 50%;transform: translateY(-50%) translateX(-50%)}
+@mixin pos-center-x     {left: 50%;transform: translateX(-50%)}
+@mixin pos-center-y     {top: 50%;transform: translateY(-50%)}
+@mixin z-index($index)  {z-index: $index}
+
+@mixin hidden-show-z-index {@include z-index(calc(var(--z-ind-select) + 1))}
+@mixin hidden-show($prefix: '') {
+  .#{$prefix}hidden-show {
+    @include hover {
+      @include hidden-show-z-index;
+      .#{$prefix}hidden {@include blk}
+    }
+  }
+}
+@mixin hidden-show-without-z-index($prefix: '') {
+  .#{$prefix}hidden-show-without-z-index {
+    @include hover {
+      .#{$prefix}hidden {@include blk}
+    }
+  }
+}

@@ -1,0 +1,107 @@
+body {
+  // Always show the scrollbar. This prevents layout jitter when navigating
+  // between pages that do and do not overflow.
+  overflow-y: scroll;
+  @extend .miw-narrow;
+}
+
+.content-width {
+  &:not(.--long)  {max-width: $page-max-width}
+  &.--long        {max-width: $page-max-width-promo}
+
+  @extend .miw-narrow, .w-full, .cen-by-mar, .content-indentation;
+}
+
+.content-indentation {
+  @include pad-h(2);
+  @include media-lg {@include pad-h(1.25)}
+  @include media-md {@include pad-h(1)};
+}
+
+.content-padding {@extend .pad-v-1x5, .pad-h-2x5, .lg-pad-1}
+
+.columns {
+  column-gap: 1rem;
+  
+  > * {@extend .inline-block, .w-full}
+}
+
+.columns-4 {
+  @extend .columns;
+  
+  column-count: 4;
+  @include media-lg {column-count: 3}
+  @include media-md {column-count: 2}
+}
+
+.columns-3 {
+  @extend .columns;
+  
+  column-count: 3;
+  @include media-lg {column-count: 2}
+  @include media-ls {column-count: 1}
+}
+
+
+// Layout
+.layout             {@extend .row-sta-str, .w-full, .--no-gap-h, .lg-col-sta-cen, .lg-gap-v-lg}
+.layout-body        {@extend .col-sta-str, .flex-1}
+.layout-body-inner  {
+  @extend .col-sta-str, .flex-1, .w-full;
+  &.--centered {.layout-content {@extend .col-cen-cen}}
+  &:not(.--no-gap-std) {@extend .gap-v-sub-std}
+}
+.layout-sidebar     {@extend .gap-v-mid, .lg-col-sta-cen}
+.layout-content     {
+  @extend .flex-1, .w-full, .pad-2x5, .lg-pad-1x5, .sm-pad-1;
+
+  & + .layout-content {&:not(.--with-pad-t) {@extend .pad-t-0}}
+}
+
+.two-ten-col {
+  .layout-sidebar {
+    width: 17%;
+    @include media-xl {width: 22.5%}
+    @extend .lg-miw-col-2;
+    @extend .lg-maw-col-3;
+  }
+
+  .layout-body {
+    width: 83%;
+    @extend .pad-l-1x5;
+    @include media-xl {width: 77.5%}
+    @extend .lg-w-full;
+    @extend .lg-pad-l-0;
+  }
+}
+
+.three-nine-col {
+  .layout-sidebar {
+    width: 25%;
+    @include media-xl {width: 27.5%}
+    @extend .lg-miw-col-2;
+    @extend .lg-maw-col-3;
+  }
+
+  .layout-body {
+    width: 75%;
+    @extend .pad-l-1x5;
+    @include media-xl {width: 72.5%}
+    @extend .lg-w-full, .lg-pad-l-0;
+  }
+}
+
+.nine-three-col {
+  .layout-sidebar {
+    width: 25%;
+    @include media-xl {width: 30%}
+  }
+
+  .layout-body {
+    width: 75%;
+    padding-right: 1.5rem;
+    @include media-xl {width: 70%}
+    @extend .lg-w-full;
+    @extend .lg-pad-r-0;
+  }
+}
