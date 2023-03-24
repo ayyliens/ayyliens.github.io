@@ -65,16 +65,16 @@ class PageIndex extends Page {
   fsPathRel() {return `index.html`}
   urlPath() {return `/`}
   htmlContent() {
-    return E.div.props(A.cls(`col-sta-cen mar-v-2`)).chi(
+    return E.div.props(A.cls(`col-sta-cen mar-1`)).chi(
       E.img.props(A.cls(`maw-col-1`).src(`/logo.png`)),
       E.div.props(A.cls(`maw-col-6 gap-v-mid`)).chi(
         E.div.props(A.cls(`text-justify responsive-typography --big font-fam-ssp`)).chi(
           new u.Raw(marked(t.intro)),
         ),
-        E.div.props(A.cls(`row-cen-sta`)).chi(
-          new u.Raw(`
-            <iframe src="https://discord.com/widget?id=1087685803318181890&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-          `),
+        E.div.props(A.cls(`row-cen-sta`)).chi(new u.Raw(t.iframeDiscord)),
+        E.div.props(A.cls(`text-justify responsive-typography --big font-fam-ssp`)).chi(
+          new u.Raw(marked(t.whoWeAre)),
+          new u.Raw(marked(t.joinUs)),
         ),
       )
     )

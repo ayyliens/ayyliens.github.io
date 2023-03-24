@@ -1,3 +1,8 @@
+@use './mod/sb/reset';
+@use './mod/sb/sb';
+
+@include sb.all;
+
 // Utils
 @import 'utils/variables';
 @import 'utils/functions';
