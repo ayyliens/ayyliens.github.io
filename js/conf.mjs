@@ -12,4 +12,4 @@ export const DIR_IMG = `img`
 export const MAIN_ID = `main`
 export const BRAND_NAME = `Ayyliens`
 export const BRAND_DOMAIN = `aliens.dev`
-export const SITE_NAME = `about:aliens.dev`
+export const SITE_NAME = `aliens.dev`

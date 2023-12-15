@@ -8,9 +8,11 @@ export const intro = `
 
 GitHub [https://github.com/ayyliens](https://github.com/ayyliens)
 
+Our mission: Completely eliminate humans from software development.
+
 We build environment for GPT-4 to build complete software systems, websites and mobile apps, not just small code snippets.
 
-To accomplish this, we will develop prompts to guide GPT-4 through the entire software development lifecycle, including:
+To accomplish this, we develop prompts and execution workflows to guide GPT-4 through the entire software development lifecycle, including:
 
 - Design and requirements analysis
 - Coding the system
@@ -18,9 +20,9 @@ To accomplish this, we will develop prompts to guide GPT-4 through the entire so
 - Deployment
 - Ongoing maintenance and support
 
-We will build feedback loops, multi-step, many-attempt, context based, self-reflection GPT conversation and automatic correction systems to enable GPT-4 improve its own work over time based on feedback. 
+We build feedback loops, multi-step, many-attempt, context based, self-reflection GPT conversation and automatic correction systems to enable GPT-4 improve its own work over time based on feedback.
 
-Our goal is for GPT-4 to be able to develop and maintain complex software systems with limited human involvement. It could significantly accelerate software development and allow humans to focus on more creative and strategic work.
+Our goal is for GPT-4 to be able to develop and maintain complex software systems with limited or no human involvement. It could significantly accelerate software development and allow humans to focus on more creative and strategic work.
 
 We will keep the community updated on our progress and hope to share examples of systems developed by GPT-4 in the coming months. Please share any feedback or suggestions you may have. We aim to build GPT-4's capabilities with the help of the community.
 
