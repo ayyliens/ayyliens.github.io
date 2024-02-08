@@ -176,7 +176,7 @@ sub       {top: $sup-sub}
     }
   }
 
-  a {
+  a:not(.btn) {
     @extend .fg-accent, .maw-full, .dec-none-hov-und;
     @include mah(22);
     

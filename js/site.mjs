@@ -64,6 +64,10 @@ export class Page404 extends PageErr {
 class PageIndex extends Page {
   fsPathRel() {return `index.html`}
   urlPath() {return `/`}
+  get desc() {
+    return `App for GPT-4 to to build complete software systems, websites and mobile apps. Eliminate humans from software development as much as possible.`
+  }
+
   htmlContent() {
     return E.div.props(A.cls(`col-sta-cen mar-1`)).chi(
       E.img.props(A.cls(`maw-col-1`).src(`/logo.png`)),
@@ -71,9 +75,7 @@ class PageIndex extends Page {
         E.div.props(A.cls(`text-justify responsive-typography --big font-fam-ssp`)).chi(
           new u.Raw(marked(t.intro)),
         ),
-        E.div.props(A.cls(`row-cen-sta`)).chi(new u.Raw(t.iframeDiscord)),
         E.div.props(A.cls(`text-justify responsive-typography --big font-fam-ssp`)).chi(
-          new u.Raw(marked(t.whoWeAre)),
           new u.Raw(marked(t.joinUs)),
         ),
       )
